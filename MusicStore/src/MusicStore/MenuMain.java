@@ -14,7 +14,7 @@ public class MenuMain extends JFrame {
 
     /**
      * Need buttons for sale, return, order, trade, buy-back, order/receive
-     * inventory?, view inventory, logoff
+     * inventory, view inventory, logoff
      */
     private JButton saleB, retB, ordB, tradeB, buyBackB, viewInvB, logoffB;
 
@@ -50,8 +50,30 @@ public class MenuMain extends JFrame {
         retHandler = new MenuMain.ReturnButtonHandler();
         retB.addActionListener(retHandler);
         
+        ordB = new JButton("Order");
+        ordB.setSize(20,20);
+        ordHandler = new MenuMain.OrderButtonHandler();
+        ordB.addActionListener(ordHandler);
         
+        tradeB = new JButton("Trade-In");
+        tradeB.setSize(20, 20);
+        tradeHandler = new MenuMain.TradeButtonHandler();
+        tradeB.addActionListener(tradeHandler);
         
+        buyBackB = new JButton("Buy-Back");
+        buyBackB.setSize(20, 20);
+        bbHandler = new MenuMain.BuyBackButtonHandler();
+        buyBackB.addActionListener(bbHandler);
+        
+        viewInvB = new JButton("View Inventory");
+        viewInvB.setSize(20,20);
+        viHandler = new MenuMain.ViewInvButtonHandler();
+        viewInvB.addActionListener(viHandler);        
+        
+        logoffB = new JButton("Logoff");
+        logoffB.setSize(20,20);
+        logoffHandler = new MenuMain.LogOffButtonHandler();
+        logoffB.addActionListener(logoffHandler);  
     }
 
     private class SaleButtonHandler implements ActionListener {
