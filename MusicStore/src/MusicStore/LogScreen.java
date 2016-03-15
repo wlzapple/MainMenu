@@ -96,6 +96,10 @@ public class LogScreen extends JFrame{
         }
     }
     
+    protected String getUser(){
+        return username.getText();
+    }
+    
 
 
     
