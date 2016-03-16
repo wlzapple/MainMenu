@@ -1,7 +1,11 @@
 package MusicStore;
 
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -14,7 +18,7 @@ public class MenuMain extends JFrame {
 
     /**
      * Need buttons for sale, return, order, trade, buy-back, order/receive
-     * inventory?, view inventory, logoff
+     * inventory, view inventory, logoff
      */
     private JButton saleB, retB, ordB, tradeB, buyBackB, viewInvB, logoffB;
 
@@ -31,6 +35,22 @@ public class MenuMain extends JFrame {
     private LogOffButtonHandler logoffHandler;
 
     public MenuMain(String user) {
+        
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        this.getContentPane().setBackground(new Color(119,129,172));
+        
         saleL = new JLabel("Make a Sale", SwingConstants.LEFT);
         retL = new JLabel("Make a Return", SwingConstants.LEFT);
         ordL = new JLabel("Order Inventory", SwingConstants.LEFT);
@@ -50,9 +70,77 @@ public class MenuMain extends JFrame {
         retHandler = new MenuMain.ReturnButtonHandler();
         retB.addActionListener(retHandler);
         
+        ordB = new JButton("Order");
+        ordB.setSize(20,20);
+        ordHandler = new MenuMain.OrderButtonHandler();
+        ordB.addActionListener(ordHandler);
+        
+        tradeB = new JButton("Trade-In");
+        tradeB.setSize(20, 20);
+        tradeHandler = new MenuMain.TradeButtonHandler();
+        tradeB.addActionListener(tradeHandler);
+        
+        buyBackB = new JButton("Buy-Back");
+        buyBackB.setSize(20, 20);
+        bbHandler = new MenuMain.BuyBackButtonHandler();
+        buyBackB.addActionListener(bbHandler);
+        
+        viewInvB = new JButton("View Inventory");
+        viewInvB.setSize(20,20);
+        viHandler = new MenuMain.ViewInvButtonHandler();
+        viewInvB.addActionListener(viHandler);        
+        
+        logoffB = new JButton("Logoff");
+        logoffB.setSize(20,20);
+        logoffHandler = new MenuMain.LogOffButtonHandler();
+        logoffB.addActionListener(logoffHandler);  
+    
+        this.setTitle("Main Menu");
+        
+        SpringLayout layout = new SpringLayout();
+        Container pane = getContentPane();
+        pane.setLayout(layout);
+        
+        //pane.add(saleL);
+        pane.add(saleB);
+        //pane.add(retL);
+        pane.add(retB);
+        //pane.add(ordL);
+        pane.add(ordB);
+        //pane.add(tradeL);
+        pane.add(tradeB);
+        //pane.add(buyBackL);
+        pane.add(buyBackB);
+        //pane.add(viewInvL);
+        pane.add(viewInvB);
+        //pane.add(logoffL);
+        pane.add(logoffB);
+        
+        layout.putConstraint(SpringLayout.WEST, saleB, 50, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.NORTH, saleB, 25, SpringLayout.NORTH, pane);
+        layout.putConstraint(SpringLayout.WEST, retB, 205, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.NORTH, retB, 25, SpringLayout.NORTH, pane);
+        layout.putConstraint(SpringLayout.EAST, ordB, -50, SpringLayout.EAST, pane);
+        layout.putConstraint(SpringLayout.NORTH, ordB, 25, SpringLayout.NORTH, pane);
+        layout.putConstraint(SpringLayout.WEST, tradeB, 100, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.NORTH, tradeB, 100, SpringLayout.NORTH, pane);
+        layout.putConstraint(SpringLayout.EAST, buyBackB, -100, SpringLayout.EAST, pane);
+        layout.putConstraint(SpringLayout.NORTH, buyBackB, 100, SpringLayout.NORTH, pane);
+        layout.putConstraint(SpringLayout.WEST, viewInvB, 25, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.SOUTH, viewInvB, -25, SpringLayout.SOUTH, pane);
+        layout.putConstraint(SpringLayout.EAST, logoffB, -25, SpringLayout.EAST, pane);
+        layout.putConstraint(SpringLayout.SOUTH, logoffB, -25, SpringLayout.SOUTH, pane);
+        
+        this.setSize(WIDTH, HEIGHT);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
         
         
     }
+        
+        
 
     private class SaleButtonHandler implements ActionListener {
 
