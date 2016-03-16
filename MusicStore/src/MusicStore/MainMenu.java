@@ -12,7 +12,7 @@ import javax.swing.*;
  *
  * @authors wlzapple, cabatts, ashalbert
  */
-public class MenuMain extends JFrame {
+public class MainMenu extends JFrame {
 
     private static final int WIDTH = 500, HEIGHT = 250;
 
@@ -34,18 +34,18 @@ public class MenuMain extends JFrame {
     private ViewInvButtonHandler viHandler;
     private LogOffButtonHandler logoffHandler;
 
-    public MenuMain(String user) {
+    public MainMenu(String user) {
         
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -62,37 +62,37 @@ public class MenuMain extends JFrame {
         //assign handlers to buttons, add ActionListeners
         saleB = new JButton("Sales");
         saleB.setSize(20, 20);
-        sHandler = new MenuMain.SaleButtonHandler();
+        sHandler = new MainMenu.SaleButtonHandler();
         saleB.addActionListener(sHandler);
         
         retB = new JButton("Return");
         retB.setSize(20, 20);
-        retHandler = new MenuMain.ReturnButtonHandler();
+        retHandler = new MainMenu.ReturnButtonHandler();
         retB.addActionListener(retHandler);
         
         ordB = new JButton("Order");
         ordB.setSize(20,20);
-        ordHandler = new MenuMain.OrderButtonHandler();
+        ordHandler = new MainMenu.OrderButtonHandler();
         ordB.addActionListener(ordHandler);
         
         tradeB = new JButton("Trade-In");
         tradeB.setSize(20, 20);
-        tradeHandler = new MenuMain.TradeButtonHandler();
+        tradeHandler = new MainMenu.TradeButtonHandler();
         tradeB.addActionListener(tradeHandler);
         
         buyBackB = new JButton("Buy-Back");
         buyBackB.setSize(20, 20);
-        bbHandler = new MenuMain.BuyBackButtonHandler();
+        bbHandler = new MainMenu.BuyBackButtonHandler();
         buyBackB.addActionListener(bbHandler);
         
         viewInvB = new JButton("View Inventory");
         viewInvB.setSize(20,20);
-        viHandler = new MenuMain.ViewInvButtonHandler();
+        viHandler = new MainMenu.ViewInvButtonHandler();
         viewInvB.addActionListener(viHandler);        
         
         logoffB = new JButton("Logoff");
         logoffB.setSize(20,20);
-        logoffHandler = new MenuMain.LogOffButtonHandler();
+        logoffHandler = new MainMenu.LogOffButtonHandler();
         logoffB.addActionListener(logoffHandler);  
     
         this.setTitle("Main Menu");
@@ -199,7 +199,7 @@ public class MenuMain extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            MenuMain.this.dispose();
+            MainMenu.this.dispose();
             MusicStore restart = new MusicStore();
         }
 
