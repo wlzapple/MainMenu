@@ -49,7 +49,7 @@ public class MainMenu extends JFrame {
         }
         
         
-        this.getContentPane().setBackground(new Color(119,129,172));
+        this.getContentPane().setBackground(new Color(0,129,172));
         
         saleL = new JLabel("Make a Sale", SwingConstants.LEFT);
         retL = new JLabel("Make a Return", SwingConstants.LEFT);
