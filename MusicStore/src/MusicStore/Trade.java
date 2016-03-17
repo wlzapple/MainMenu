@@ -7,7 +7,7 @@ package MusicStore;
 
 /**
  *
- * @author zapple94
+ * @author wlzapple, cabatts, ashalbert
  */
 class Trade {
     
