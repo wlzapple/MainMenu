@@ -97,6 +97,7 @@ public class MainMenu extends JFrame {
     
         this.setTitle("Main Menu");
         
+        //Main menu layout
         SpringLayout layout = new SpringLayout();
         Container pane = getContentPane();
         pane.setLayout(layout);
