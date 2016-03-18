@@ -17,12 +17,26 @@ class ReturnItem {
     private final static int WIDTH = 350;
     private final static int HEIGHT = 200;
     
-    private JLabel receipt;
+    private JLabel itemL, condL;
     
-    private JButton yes, no;
+    private JButton finalize;
     
-    private YesButtonHandler yesBH;
-    private NoButtonHandler noBH;
+    private String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
+            "Electric Guitar", "Baritone", "Flute", "Drum Sticks", "Music Books",
+            "Stands", "Amplifiers", "Guitar Picks", "Baritone Sax", "Timpani",
+            "Cymbals", "CDs", "Violin", "Piano", "Ocarina", "Acoustic Guitar",
+            "Trombone", "Sousephone", "Marimba", "Clarinet", "Triangle"
+    };
+    
+    private JComboBox<String> instrumentBox;
+    
+    
+    
+    //private JButton yes, no;
+    
+//    private YesButtonHandler yesBH;
+//    private NoButtonHandler noBH;
+    private ComboBoxHandler instCB;
     
     public ReturnItem(){
         //ask if they have a receipt
@@ -31,27 +45,45 @@ class ReturnItem {
         if(receiptYN != JOptionPane.YES_OPTION){
             JOptionPane.showMessageDialog(null, "Inform the customer that we cannot accept an item without a receipt.", "", JOptionPane.PLAIN_MESSAGE);
         }
+        else{
+            
+            instrumentBox = new JComboBox<>(instruments);
+            instrumentBox.setSelectedIndex(-1);
+            instrumentBox.addActionListener(instCB);
+            
+            
+            
+        }
     }
 
-    private class NoButtonHandler implements ActionListener{
+//    private class NoButtonHandler implements ActionListener{
+//
+//        public NoButtonHandler() {
+//        }
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        }
+//    }
+//
+//    private class YesButtonHandler implements ActionListener {
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        }
+//
+//        
+//    }
 
-        public NoButtonHandler() {
-        }
+    private static class ComboBoxHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
-    }
 
-    private class YesButtonHandler implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        
     }
     
 }
