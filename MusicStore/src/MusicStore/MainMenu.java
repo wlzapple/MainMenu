@@ -33,8 +33,10 @@ public class MainMenu extends JFrame {
     private BuyBackButtonHandler bbHandler;
     private ViewInvButtonHandler viHandler;
     private LogOffButtonHandler logoffHandler;
+    String username;
 
     public MainMenu(String user) {
+        username = user;
         
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
@@ -147,7 +149,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Sale sale = new Sale();
+            Sale sale = new Sale(username);
         }
 
     }
