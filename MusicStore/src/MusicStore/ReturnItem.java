@@ -32,9 +32,12 @@ class ReturnItem extends JFrame{
     
     private JComboBox<String> instrumentBox;
     private JComboBox<String> conds;
+      
+    //private JButton yes, no;
     
-    
-    
+//    private YesButtonHandler yesBH;
+//    private NoButtonHandler noBH;
+  
     //private JButton yes, no;
     private BoxHandler instBoxHandler;
     
@@ -52,6 +55,7 @@ class ReturnItem extends JFrame{
             
             instrumentBox = new JComboBox<>(instruments);
             instrumentBox.setSelectedIndex(-1);
+
             instBoxHandler = new BoxHandler();
             instrumentBox.addActionListener(instBoxHandler);
             
@@ -91,6 +95,28 @@ class ReturnItem extends JFrame{
 //        
 //    }
 
+
+//    private class NoButtonHandler implements ActionListener{
+//
+//        public NoButtonHandler() {
+//        }
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        }
+//    }
+//
+//    private class YesButtonHandler implements ActionListener {
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        }
+//
+//        
+//    }
+
     private static class BoxHandler implements ActionListener{
 
         @Override
@@ -98,7 +124,6 @@ class ReturnItem extends JFrame{
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
-        
     }
     
 }
