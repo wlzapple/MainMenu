@@ -5,15 +5,15 @@
  */
 package MusicStore;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 /**
  *
  * @author wlzapple, cabatts, ashalbert
  */
-class ReturnItem {
+class ReturnItem extends JFrame{
     private final static int WIDTH = 350;
     private final static int HEIGHT = 200;
     
@@ -27,16 +27,21 @@ class ReturnItem {
             "Cymbals", "CDs", "Violin", "Piano", "Ocarina", "Acoustic Guitar",
             "Trombone", "Sousephone", "Marimba", "Clarinet", "Triangle"
     };
+
+    private String[] condition = {"Perfect", "Good", "Acceptable", "Broken"};
     
     private JComboBox<String> instrumentBox;
-    
-    
-    
+    private JComboBox<String> conds;
+      
     //private JButton yes, no;
     
 //    private YesButtonHandler yesBH;
 //    private NoButtonHandler noBH;
-    private ComboBoxHandler instCB;
+
+    private BoxHandler instBoxHandler;
+    
+//    private YesButtonHandler yesBH;
+//    private NoButtonHandler noBH;
     
     public ReturnItem(){
         //ask if they have a receipt
@@ -49,8 +54,20 @@ class ReturnItem {
             
             instrumentBox = new JComboBox<>(instruments);
             instrumentBox.setSelectedIndex(-1);
-            instrumentBox.addActionListener(instCB);
             
+            instBoxHandler = new BoxHandler();
+            instrumentBox.addActionListener(instBoxHandler);
+            
+            itemL = new JLabel("Item to Return", SwingConstants.LEFT);
+            condL = new JLabel("Condition of Item", SwingConstants.LEFT);
+            
+            this.setTitle("Return an Item");
+            
+            SpringLayout layout = new SpringLayout();
+            Container pane = getContentPane();
+            pane.setLayout(layout);
+            
+           // pane.add();
             
             
         }
@@ -77,7 +94,8 @@ class ReturnItem {
 //        
 //    }
 
-    private static class ComboBoxHandler implements ActionListener {
+
+    private static class BoxHandler implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
