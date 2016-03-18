@@ -23,6 +23,15 @@ class ReturnItem {
     
     private YesButtonHandler yesBH;
     private NoButtonHandler noBH;
+    
+    public ReturnItem(){
+        //ask if they have a receipt
+        int rYN = JOptionPane.YES_NO_OPTION;
+        int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt?", "Receipt", rYN);
+        if(receiptYN != JOptionPane.YES_OPTION){
+            JOptionPane.showMessageDialog(null, "Inform the customer that we cannot accept an item without a receipt.", "", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
 
     private class NoButtonHandler implements ActionListener{
 
