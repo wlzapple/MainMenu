@@ -201,7 +201,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            MusicStore restart = new MusicStore();
+            LogScreen restart = new LogScreen();
         }
 
     }
