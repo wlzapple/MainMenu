@@ -33,16 +33,12 @@ class ReturnItem extends JFrame{
     private JComboBox<String> instrumentBox;
     private JComboBox<String> conds;
       
-    //private JButton yes, no;
     
     private FinalButtonHandler finalBH;
-//    private NoButtonHandler noBH;
   
     private JButton finalButton;
     
-    
-//    private YesButtonHandler yesBH;
-//    private NoButtonHandler noBH;
+  
     
     public ReturnItem(){
         //ask if they have a receipt
@@ -68,62 +64,21 @@ class ReturnItem extends JFrame{
             Container pane = getContentPane();
             pane.setLayout(layout);
             
-           // pane.add();
+
             
             
         }
     }
 
-//    private class NoButtonHandler implements ActionListener{
-//
-//        public NoButtonHandler() {
-//        }
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//    }
-//
-//    private class YesButtonHandler implements ActionListener {
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//
-//        
-//    }
 
-
-//    private class NoButtonHandler implements ActionListener{
-//
-//        public NoButtonHandler() {
-//        }
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//    }
-//
-//    private class YesButtonHandler implements ActionListener {
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//
-//        
-//    }
 
     
 
-    private static class FinalButtonHandler implements ActionListener {
+    private class FinalButtonHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            String item = instrumentBox.getSelectedItem().toString();
         }
 
         
