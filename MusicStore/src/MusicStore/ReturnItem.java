@@ -28,21 +28,17 @@ class ReturnItem extends JFrame{
             "Trombone", "Sousephone", "Marimba", "Clarinet", "Triangle"
     };
     
-    private String[] condition = {"Perfect", "Good", "Acceptable", "Broken"};
+    private String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
     
     private JComboBox<String> instrumentBox;
     private JComboBox<String> conds;
       
-    //private JButton yes, no;
     
-//    private YesButtonHandler yesBH;
-//    private NoButtonHandler noBH;
+    private FinalButtonHandler finalBH;
   
-    //private JButton yes, no;
-    private BoxHandler instBoxHandler;
+    private JButton finalButton;
     
-//    private YesButtonHandler yesBH;
-//    private NoButtonHandler noBH;
+  
     
     public ReturnItem(){
         //ask if they have a receipt
@@ -55,75 +51,68 @@ class ReturnItem extends JFrame{
             
             instrumentBox = new JComboBox<>(instruments);
             instrumentBox.setSelectedIndex(-1);
-
-            instBoxHandler = new BoxHandler();
-            instrumentBox.addActionListener(instBoxHandler);
+            
+            conds = new JComboBox<>(conditions);
+            conds.setSelectedIndex(-1);
+            
+            finalButton = new JButton("Finalize");
+            finalBH = new FinalButtonHandler();
+            finalButton.addActionListener(finalBH);
             
             itemL = new JLabel("Item to Return", SwingConstants.LEFT);
             condL = new JLabel("Condition of Item", SwingConstants.LEFT);
             
             this.setTitle("Return an Item");
             
+            
+            
             SpringLayout layout = new SpringLayout();
             Container pane = getContentPane();
             pane.setLayout(layout);
             
-           // pane.add();
+            pane.add(itemL);
+            pane.add(instrumentBox);
+            pane.add(condL);
+            pane.add(conds);
+            pane.add(finalButton);
+            
+            layout.putConstraint(SpringLayout.WEST, itemL, 50, SpringLayout.WEST, pane);
+            layout.putConstraint(SpringLayout.NORTH, itemL, 25, SpringLayout.NORTH, pane);
+            layout.putConstraint(SpringLayout.WEST, instrumentBox, 50, SpringLayout.WEST, pane);
+            layout.putConstraint(SpringLayout.NORTH, instrumentBox, 40, SpringLayout.NORTH, pane);
+            layout.putConstraint(SpringLayout.EAST, condL, -50, SpringLayout.EAST, pane);
+            layout.putConstraint(SpringLayout.NORTH, condL, 25, SpringLayout.NORTH, pane);
+            layout.putConstraint(SpringLayout.EAST, conds, -50, SpringLayout.EAST, pane);
+            layout.putConstraint(SpringLayout.NORTH, conds, 40, SpringLayout.NORTH, pane);
+            layout.putConstraint(SpringLayout.WEST, finalButton, 120, SpringLayout.WEST, pane);
+            layout.putConstraint(SpringLayout.SOUTH, finalButton, -25, SpringLayout.SOUTH, pane);
+            
+            this.setSize(WIDTH, HEIGHT);
+            this.setLocationRelativeTo(null);
+            this.setVisible(true);
+            this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            
+            
+
             
             
         }
     }
 
-//    private class NoButtonHandler implements ActionListener{
-//
-//        public NoButtonHandler() {
-//        }
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//    }
-//
-//    private class YesButtonHandler implements ActionListener {
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//
-//        
-//    }
 
 
-//    private class NoButtonHandler implements ActionListener{
-//
-//        public NoButtonHandler() {
-//        }
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//    }
-//
-//    private class YesButtonHandler implements ActionListener {
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//
-//        
-//    }
+    
 
-    private static class BoxHandler implements ActionListener{
+    private class FinalButtonHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            String item = instrumentBox.getSelectedItem().toString();
+            String cond = conds.getSelectedItem().toString();
+            System.out.println(item + cond);
         }
 
+        
     }
     
 }
