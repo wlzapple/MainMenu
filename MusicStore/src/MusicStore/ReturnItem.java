@@ -35,11 +35,11 @@ class ReturnItem extends JFrame{
       
     //private JButton yes, no;
     
-//    private YesButtonHandler yesBH;
+    private FinalButtonHandler finalBH;
 //    private NoButtonHandler noBH;
   
-    //private JButton yes, no;
-    private BoxHandler instBoxHandler;
+    private JButton finalButton;
+    
     
 //    private YesButtonHandler yesBH;
 //    private NoButtonHandler noBH;
@@ -56,8 +56,8 @@ class ReturnItem extends JFrame{
             instrumentBox = new JComboBox<>(instruments);
             instrumentBox.setSelectedIndex(-1);
 
-            instBoxHandler = new BoxHandler();
-            instrumentBox.addActionListener(instBoxHandler);
+            finalBH = new FinalButtonHandler();
+            finalButton.addActionListener(finalBH);
             
             itemL = new JLabel("Item to Return", SwingConstants.LEFT);
             condL = new JLabel("Condition of Item", SwingConstants.LEFT);
@@ -117,13 +117,16 @@ class ReturnItem extends JFrame{
 //        
 //    }
 
-    private static class BoxHandler implements ActionListener{
+    
+
+    private static class FinalButtonHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
+        
     }
     
 }
