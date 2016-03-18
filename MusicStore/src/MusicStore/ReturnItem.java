@@ -28,7 +28,7 @@ class ReturnItem extends JFrame{
             "Trombone", "Sousephone", "Marimba", "Clarinet", "Triangle"
     };
     
-    private String[] condition = {"Perfect", "Good", "Acceptable", "Broken"};
+    private String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
     
     private JComboBox<String> instrumentBox;
     private JComboBox<String> conds;
@@ -51,7 +51,11 @@ class ReturnItem extends JFrame{
             
             instrumentBox = new JComboBox<>(instruments);
             instrumentBox.setSelectedIndex(-1);
-
+            
+            conds = new JComboBox<>(conditions);
+            conds.setSelectedIndex(-1);
+            
+            finalButton = new JButton("Finalize");
             finalBH = new FinalButtonHandler();
             finalButton.addActionListener(finalBH);
             
@@ -60,9 +64,34 @@ class ReturnItem extends JFrame{
             
             this.setTitle("Return an Item");
             
+            
+            
             SpringLayout layout = new SpringLayout();
             Container pane = getContentPane();
             pane.setLayout(layout);
+            
+            pane.add(itemL);
+            pane.add(instrumentBox);
+            pane.add(condL);
+            pane.add(conds);
+            pane.add(finalButton);
+            
+            layout.putConstraint(SpringLayout.WEST, itemL, 50, SpringLayout.WEST, pane);
+            layout.putConstraint(SpringLayout.NORTH, itemL, 25, SpringLayout.NORTH, pane);
+            layout.putConstraint(SpringLayout.WEST, instrumentBox, 50, SpringLayout.WEST, pane);
+            layout.putConstraint(SpringLayout.NORTH, instrumentBox, 40, SpringLayout.NORTH, pane);
+            layout.putConstraint(SpringLayout.EAST, condL, -50, SpringLayout.EAST, pane);
+            layout.putConstraint(SpringLayout.NORTH, condL, 25, SpringLayout.NORTH, pane);
+            layout.putConstraint(SpringLayout.EAST, conds, -50, SpringLayout.EAST, pane);
+            layout.putConstraint(SpringLayout.NORTH, conds, 40, SpringLayout.NORTH, pane);
+            layout.putConstraint(SpringLayout.WEST, finalButton, 120, SpringLayout.WEST, pane);
+            layout.putConstraint(SpringLayout.SOUTH, finalButton, -25, SpringLayout.SOUTH, pane);
+            
+            this.setSize(WIDTH, HEIGHT);
+            this.setLocationRelativeTo(null);
+            this.setVisible(true);
+            this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            
             
 
             
@@ -79,6 +108,8 @@ class ReturnItem extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             String item = instrumentBox.getSelectedItem().toString();
+            String cond = conds.getSelectedItem().toString();
+            System.out.println(item + cond);
         }
 
         
