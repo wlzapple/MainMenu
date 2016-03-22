@@ -87,9 +87,9 @@ public class Sale extends JFrame{
         pane.add(transact);
         
         layout.putConstraint(SpringLayout.WEST, back, 50, SpringLayout.WEST, pane);
-        layout.putConstraint(SpringLayout.NORTH, back, 25, SpringLayout.NORTH, pane);
-        layout.putConstraint(SpringLayout.WEST, addTC, 205, SpringLayout.WEST, pane);
-        layout.putConstraint(SpringLayout.NORTH, addTC, 25, SpringLayout.NORTH, pane);
+        layout.putConstraint(SpringLayout.SOUTH, back, -25, SpringLayout.SOUTH, pane);
+        layout.putConstraint(SpringLayout.WEST, addTC, 190, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.SOUTH, addTC, -25, SpringLayout.SOUTH, pane);
         layout.putConstraint(SpringLayout.EAST, transact, -50, SpringLayout.EAST, pane);
         layout.putConstraint(SpringLayout.SOUTH, transact, -25, SpringLayout.SOUTH, pane);
         
@@ -111,7 +111,7 @@ public class Sale extends JFrame{
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            MainMenu mainmenu = new MainMenu(username.getText());
+            //MainMenu mainmenu = new MainMenu(username.getText());
         }
     }
     
