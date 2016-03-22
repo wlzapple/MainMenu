@@ -79,16 +79,16 @@ public class LogScreen extends JFrame{
     }
 
     
-    protected class LoginButtonHandler implements ActionListener {
+    private class LoginButtonHandler implements ActionListener {
         
         @Override
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
-            MenuMain start = new MenuMain(username.getText());
+            MainMenu start = new MainMenu(username.getText());
         }
     }
     
-    protected class ExitButtonHandler implements ActionListener {
+    private class ExitButtonHandler implements ActionListener {
         
         @Override
         public void actionPerformed(ActionEvent e) {
