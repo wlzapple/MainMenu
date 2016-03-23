@@ -158,7 +158,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ReturnItem ret = new ReturnItem();
+            ReturnItem ret = new ReturnItem(username);
         }
 
     }
