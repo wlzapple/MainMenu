@@ -32,6 +32,7 @@ class ReturnItem extends JFrame {
     
     private FinalButtonHandler finalBH;
     private BoxValueChangeHandler select;
+    private backButtonHandler backBH;
     
     public ReturnItem(String username) {
         //ask if they have a receipt
@@ -53,6 +54,10 @@ class ReturnItem extends JFrame {
             finalButton = new JButton("Finalize");
             finalBH = new FinalButtonHandler();
             finalButton.addActionListener(finalBH);
+            
+            back = new JButton("Back");
+            backBH = new backButtonHandler();
+            back.addActionListener(backBH);
             
             itemL = new JLabel("Item to Return", SwingConstants.LEFT);
             condL = new JLabel("Condition of Item", SwingConstants.LEFT);
