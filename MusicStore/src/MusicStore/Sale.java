@@ -154,7 +154,8 @@ public class Sale extends JFrame {
     }
 
     private class transactButtonHandler implements ActionListener {
-
+        private JButton confirm;
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             /*for (int j = 0; j < cart.length && cart[j] != null; j++) {
