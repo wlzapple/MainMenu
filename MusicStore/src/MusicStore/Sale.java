@@ -71,8 +71,8 @@ public class Sale extends JFrame {
 
         addTC = new JButton("Add to Cart");
         addTC.setSize(20, 20);
-        //addBH = new Sale.addButtonHandler();
-        //addTC.addActionListener(addBH);
+        addBH = new Sale.addButtonHandler();
+        addTC.addActionListener(addBH);
 
         transact = new JButton("Transact");
         transact.setSize(20, 20);
@@ -124,6 +124,7 @@ public class Sale extends JFrame {
     }
 
     private class transactButtonHandler implements ActionListener {
+        private JButton confirm;
         
         @Override
         public void actionPerformed(ActionEvent e) {
