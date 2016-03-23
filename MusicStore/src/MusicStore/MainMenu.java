@@ -149,6 +149,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            MainMenu.this.dispose();
             Sale sale = new Sale(username);
         }
 
@@ -158,6 +159,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            MainMenu.this.dispose();
             ReturnItem ret = new ReturnItem(username);
         }
 

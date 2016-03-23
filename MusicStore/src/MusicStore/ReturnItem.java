@@ -114,6 +114,7 @@ class ReturnItem extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            ReturnItem.this.dispose();
             MainMenu mainMenu = new MainMenu(username);
         }
     }
