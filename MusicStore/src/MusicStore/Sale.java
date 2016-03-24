@@ -31,7 +31,7 @@ public class Sale extends JFrame {
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
         "Stands", "Amplifiers", "Guitar Picks", "Baritone Sax", "Timpani",
         "Cymbals", "CDs", "Violin", "Piano", "Ocarina", "Acoustic Guitar",
-        "Trombone", "Sousephone", "Marimba", "Clarinet", "Triangle"
+        "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"
     };
 
     JComboBox<String> instrumentList;
