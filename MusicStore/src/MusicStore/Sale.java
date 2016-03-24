@@ -172,6 +172,8 @@ public class Sale extends JFrame {
         private backButtonHandler backBH;
         private transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
+        JComboBox<String> checkOut;
+        String item;
 
         public Transaction(String[] cart) {
             
@@ -192,6 +194,11 @@ public class Sale extends JFrame {
             backL = new JLabel("Back to Sale", SwingConstants.LEFT);
             transactL = new JLabel("Transact", SwingConstants.LEFT);
             removeL = new JLabel("Remove Item", SwingConstants.LEFT);
+            
+            checkOut = new JComboBox(cart);
+            item = (String) checkOut.getSelectedItem();
+            checkOut.setSelectedIndex(0);
+            checkOut.addActionListener(removeBH);
 
             back = new JButton("Back");
             back.setSize(20, 20);
@@ -217,6 +224,7 @@ public class Sale extends JFrame {
             pane.add(back);
             pane.add(transact);
             pane.add(remove);
+            pane.add(checkOut);
             
             layout.putConstraint(SpringLayout.WEST, back, 50, SpringLayout.WEST, pane);
             layout.putConstraint(SpringLayout.SOUTH, back, -25, SpringLayout.SOUTH, pane);
@@ -224,13 +232,16 @@ public class Sale extends JFrame {
             layout.putConstraint(SpringLayout.SOUTH, remove, -25, SpringLayout.SOUTH, pane);
             layout.putConstraint(SpringLayout.EAST, transact, -50, SpringLayout.EAST, pane);
             layout.putConstraint(SpringLayout.SOUTH, transact, -25, SpringLayout.SOUTH, pane);
+            layout.putConstraint(SpringLayout.WEST, checkOut, 190, SpringLayout.WEST, pane);
+            layout.putConstraint(SpringLayout.NORTH, checkOut, 25, SpringLayout.NORTH, pane);
             
             this.setSize(WIDTH, HEIGHT);
             this.setLocationRelativeTo(null);
             this.setVisible(true);
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
             
-            
+            JOptionPane.showMessageDialog(null, "Confirm with customer that cart contents"
+                    + " are correct.");
         }
 
         private class backButtonHandler implements ActionListener {
