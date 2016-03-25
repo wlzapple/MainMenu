@@ -127,7 +127,7 @@ public class MainMenu extends JFrame {
         layout.putConstraint(SpringLayout.EAST, logoffB, -25, SpringLayout.EAST, pane);
         layout.putConstraint(SpringLayout.SOUTH, logoffB, -25, SpringLayout.SOUTH, pane);
         
-        if(username != "manager"){
+        if(!"manager".equals(username)){
             tradeB.setEnabled(false);
             buyBackB.setEnabled(false);
             ordB.setEnabled(false);
