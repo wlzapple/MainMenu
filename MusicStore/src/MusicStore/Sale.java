@@ -32,7 +32,7 @@ public class Sale extends JFrame {
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
         "Stands", "Amplifiers", "Guitar Picks", "Baritone Sax", "Timpani",
         "Cymbals", "CDs", "Violin", "Piano", "Ocarina", "Acoustic Guitar",
-        "Trombone", "Sousephone", "Marimba", "Clarinet", "Triangle"
+        "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"
     };
 
     JComboBox<String> instrumentList;
@@ -71,8 +71,8 @@ public class Sale extends JFrame {
 
         addTC = new JButton("Add to Cart");
         addTC.setSize(20, 20);
-        //addBH = new Sale.addButtonHandler();
-        //addTC.addActionListener(addBH);
+        addBH = new Sale.addButtonHandler();
+        addTC.addActionListener(addBH);
 
         transact = new JButton("Transact");
         transact.setSize(20, 20);
@@ -92,7 +92,7 @@ public class Sale extends JFrame {
 
         layout.putConstraint(SpringLayout.WEST, back, 50, SpringLayout.WEST, pane);
         layout.putConstraint(SpringLayout.SOUTH, back, -25, SpringLayout.SOUTH, pane);
-        layout.putConstraint(SpringLayout.WEST, addTC, 190, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.WEST, addTC, 200, SpringLayout.WEST, pane);
         layout.putConstraint(SpringLayout.SOUTH, addTC, -25, SpringLayout.SOUTH, pane);
         layout.putConstraint(SpringLayout.EAST, transact, -50, SpringLayout.EAST, pane);
         layout.putConstraint(SpringLayout.SOUTH, transact, -25, SpringLayout.SOUTH, pane);
@@ -106,15 +106,16 @@ public class Sale extends JFrame {
     }
 
     private class backButtonHandler implements ActionListener {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
+            setVisible(false);
             MainMenu mainMenu = new MainMenu(username);
         }
     }
 
     private class addButtonHandler implements ActionListener {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             cart[i] = (String) instrumentList.getSelectedItem();
@@ -123,9 +124,11 @@ public class Sale extends JFrame {
     }
 
     private class transactButtonHandler implements ActionListener {
-
+        private JButton confirm;
+        
         @Override
         public void actionPerformed(ActionEvent e) {
+            
         }
     }
 }

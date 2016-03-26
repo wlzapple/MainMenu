@@ -37,7 +37,7 @@ public class MainMenu extends JFrame {
 
     public MainMenu(String user) {
         username = user;
-        
+
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (ClassNotFoundException ex) {
@@ -49,76 +49,69 @@ public class MainMenu extends JFrame {
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        this.getContentPane().setBackground(new Color(0,129,172));
-        
+
+        this.getContentPane().setBackground(new Color(0, 129, 172));
+
         saleL = new JLabel("Make a Sale", SwingConstants.LEFT);
         retL = new JLabel("Make a Return", SwingConstants.LEFT);
         ordL = new JLabel("Order Inventory", SwingConstants.LEFT);
-        tradeL = new JLabel("Make a Trade",SwingConstants.LEFT);
+        tradeL = new JLabel("Make a Trade", SwingConstants.LEFT);
         buyBackL = new JLabel("BuyBack Item", SwingConstants.LEFT);
         viewInvL = new JLabel("View Inventory", SwingConstants.LEFT);
         logoffL = new JLabel("Make a Sale", SwingConstants.LEFT);
-        
+
         //assign handlers to buttons, add ActionListeners
         saleB = new JButton("Sales");
         saleB.setSize(20, 20);
         sHandler = new MainMenu.SaleButtonHandler();
         saleB.addActionListener(sHandler);
-        
+
         retB = new JButton("Return");
         retB.setSize(20, 20);
         retHandler = new MainMenu.ReturnButtonHandler();
         retB.addActionListener(retHandler);
-        
+
         ordB = new JButton("Order");
-        ordB.setSize(20,20);
+        ordB.setSize(20, 20);
         ordHandler = new MainMenu.OrderButtonHandler();
         ordB.addActionListener(ordHandler);
-        
+
         tradeB = new JButton("Trade-In");
         tradeB.setSize(20, 20);
         tradeHandler = new MainMenu.TradeButtonHandler();
         tradeB.addActionListener(tradeHandler);
-        
+
         buyBackB = new JButton("Buy-Back");
         buyBackB.setSize(20, 20);
         bbHandler = new MainMenu.BuyBackButtonHandler();
         buyBackB.addActionListener(bbHandler);
-        
+
         viewInvB = new JButton("View Inventory");
-        viewInvB.setSize(20,20);
+        viewInvB.setSize(20, 20);
         viHandler = new MainMenu.ViewInvButtonHandler();
-        viewInvB.addActionListener(viHandler);        
-        
+        viewInvB.addActionListener(viHandler);
+
         logoffB = new JButton("Logoff");
-        logoffB.setSize(20,20);
+        logoffB.setSize(20, 20);
         logoffHandler = new MainMenu.LogOffButtonHandler();
-        logoffB.addActionListener(logoffHandler);  
-    
+        logoffB.addActionListener(logoffHandler);
+
         this.setTitle("Main Menu");
-        
+
         //Main menu layout
         SpringLayout layout = new SpringLayout();
         Container pane = getContentPane();
         pane.setLayout(layout);
+
         
-        //pane.add(saleL);
         pane.add(saleB);
-        //pane.add(retL);
         pane.add(retB);
-        //pane.add(ordL);
         pane.add(ordB);
-        //pane.add(tradeL);
         pane.add(tradeB);
-        //pane.add(buyBackL);
         pane.add(buyBackB);
-        //pane.add(viewInvL);
         pane.add(viewInvB);
-        //pane.add(logoffL);
         pane.add(logoffB);
-        
+
         layout.putConstraint(SpringLayout.WEST, saleB, 50, SpringLayout.WEST, pane);
         layout.putConstraint(SpringLayout.NORTH, saleB, 25, SpringLayout.NORTH, pane);
         layout.putConstraint(SpringLayout.WEST, retB, 205, SpringLayout.WEST, pane);
@@ -134,21 +127,24 @@ public class MainMenu extends JFrame {
         layout.putConstraint(SpringLayout.EAST, logoffB, -25, SpringLayout.EAST, pane);
         layout.putConstraint(SpringLayout.SOUTH, logoffB, -25, SpringLayout.SOUTH, pane);
         
+        if(!"manager".equals(username)){
+            tradeB.setEnabled(false);
+            buyBackB.setEnabled(false);
+            ordB.setEnabled(false);
+        }
+
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        
-        
+
     }
-        
-        
 
     private class SaleButtonHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            MainMenu.this.dispose();
             Sale sale = new Sale(username);
         }
 
@@ -158,6 +154,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            MainMenu.this.dispose();
             ReturnItem ret = new ReturnItem(username);
         }
 
@@ -167,6 +164,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            MainMenu.this.dispose();
             Order order = new Order();
         }
 
@@ -176,6 +174,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            MainMenu.this.dispose();
             Trade trade = new Trade();
         }
     }
@@ -184,6 +183,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            MainMenu.this.dispose();
             BuyBack buyback = new BuyBack();
         }
 
@@ -193,7 +193,8 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Inventory inv = new Inventory();
+            MainMenu.this.dispose();
+            Inventory inv = new Inventory(username);
         }
 
     }
