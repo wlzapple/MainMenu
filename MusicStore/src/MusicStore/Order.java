@@ -82,7 +82,7 @@ public class Order extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Inventory inv = new Inventory(); //To change body of generated methods, choose Tools | Templates.
+            //Inventory inv = new Inventory(); //To change body of generated methods, choose Tools | Templates.
         }
 
     }
