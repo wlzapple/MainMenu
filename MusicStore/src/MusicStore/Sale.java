@@ -23,7 +23,7 @@ public class Sale extends JFrame {
     private backButtonHandler backBH;
     private addButtonHandler addBH;
     private transactButtonHandler transactBH;
-    String username;
+    private String username;
     String[] cart = new String[25];
     int i = 0;
 
@@ -39,18 +39,6 @@ public class Sale extends JFrame {
 
     public Sale(String user) {
         username = user;
-
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
@@ -126,6 +114,12 @@ public class Sale extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (cart[0] == null){
+                JOptionPane.showMessageDialog(null, "The cart is empty."
+                        + " Please select an item and select 'Add to Cart'");
+                Sale.this.dispose();
+                Sale sale = new Sale(username);
+            }
             Transaction transact = new Transaction(cart);
         }
     }
@@ -134,7 +128,6 @@ public class Sale extends JFrame {
 
         private final static int WIDTH = 500, HEIGHT = 250;
         private JButton back, transact, remove;
-        private JLabel backL, transactL, removeL;
         private backButtonHandler backBH;
         private transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
@@ -161,10 +154,6 @@ public class Sale extends JFrame {
             }
 
             this.getContentPane().setBackground(new Color(0, 129, 172));
-
-            backL = new JLabel("Back to Sale", SwingConstants.LEFT);
-            transactL = new JLabel("Transact", SwingConstants.LEFT);
-            removeL = new JLabel("Remove Item", SwingConstants.LEFT);
 
             checkOut = new JComboBox(cart);
             item = (String) checkOut.getSelectedItem();

@@ -127,11 +127,11 @@ public class MainMenu extends JFrame {
         layout.putConstraint(SpringLayout.EAST, logoffB, -25, SpringLayout.EAST, pane);
         layout.putConstraint(SpringLayout.SOUTH, logoffB, -25, SpringLayout.SOUTH, pane);
         
-        if(!"manager".equals(username)){
+        /*if(!"manager".equals(username)){
             tradeB.setEnabled(false);
             buyBackB.setEnabled(false);
             ordB.setEnabled(false);
-        }
+        }*/
 
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);
@@ -184,7 +184,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            BuyBack buyback = new BuyBack();
+            BuyBack buyback = new BuyBack(username);
         }
 
     }
