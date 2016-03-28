@@ -19,11 +19,11 @@ public class Sale extends JFrame {
 
     private final static int WIDTH = 500, HEIGHT = 250;
     private JButton back, addTC, transact;
-    private JLabel backL, addL, transactL;
     private backButtonHandler backBH;
     private addButtonHandler addBH;
     private transactButtonHandler transactBH;
-    String username;
+    private BoxValueChangeHandler select;
+    private String username;
     String[] cart = new String[25];
     int i = 0;
 
@@ -40,28 +40,13 @@ public class Sale extends JFrame {
     public Sale(String user) {
         username = user;
 
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
-        backL = new JLabel("Back to Main Menu", SwingConstants.LEFT);
-        addL = new JLabel("Add to Cart", SwingConstants.LEFT);
-        transactL = new JLabel("Transact", SwingConstants.LEFT);
-
+        select = new BoxValueChangeHandler();
         instrumentList = new JComboBox<>(instruments);
         selectedInstrument = (String) instrumentList.getSelectedItem();
         instrumentList.setSelectedIndex(-1);
-        instrumentList.addActionListener(addBH);
+        instrumentList.addActionListener(select);
 
         back = new JButton("Back");
         back.setSize(20, 20);
@@ -88,6 +73,7 @@ public class Sale extends JFrame {
         pane.add(addTC);
         pane.add(transact);
         pane.add(instrumentList);
+        transact.setEnabled(false);
 
         layout.putConstraint(SpringLayout.WEST, back, 50, SpringLayout.WEST, pane);
         layout.putConstraint(SpringLayout.SOUTH, back, -25, SpringLayout.SOUTH, pane);
@@ -102,6 +88,17 @@ public class Sale extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    private class BoxValueChangeHandler implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (cart[0] != null){
+                    transact.setEnabled(true);
+                }
+        }
+
     }
 
     private class backButtonHandler implements ActionListener {
@@ -130,11 +127,10 @@ public class Sale extends JFrame {
         }
     }
 
-    public class Transaction extends JFrame {
+    private class Transaction extends JFrame {
 
         private final static int WIDTH = 500, HEIGHT = 250;
         private JButton back, transact, remove;
-        private JLabel backL, transactL, removeL;
         private backButtonHandler backBH;
         private transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
@@ -148,23 +144,7 @@ public class Sale extends JFrame {
             JOptionPane.showMessageDialog(null, "Confirm with customer that cart contents"
                     + " are correct.");
 
-            try {
-                UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedLookAndFeelException ex) {
-                Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
             this.getContentPane().setBackground(new Color(0, 129, 172));
-
-            backL = new JLabel("Back to Sale", SwingConstants.LEFT);
-            transactL = new JLabel("Transact", SwingConstants.LEFT);
-            removeL = new JLabel("Remove Item", SwingConstants.LEFT);
 
             checkOut = new JComboBox(cart);
             item = (String) checkOut.getSelectedItem();
@@ -196,7 +176,7 @@ public class Sale extends JFrame {
             pane.add(transact);
             pane.add(remove);
             pane.add(checkOut);
-
+            
             layout.putConstraint(SpringLayout.WEST, back, 50, SpringLayout.WEST, pane);
             layout.putConstraint(SpringLayout.SOUTH, back, -25, SpringLayout.SOUTH, pane);
             layout.putConstraint(SpringLayout.WEST, remove, 200, SpringLayout.WEST, pane);
@@ -227,6 +207,7 @@ public class Sale extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 Transaction.this.dispose();
                 JOptionPane.showMessageDialog(null, "Your total is: " + "$X");
                 MainMenu mainMenu = new MainMenu(username);
