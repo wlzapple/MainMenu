@@ -17,37 +17,72 @@ import javax.swing.*;
 public class Order extends JFrame{
     private static final int WIDTH = 350, HEIGHT = 200;
     
-    private JButton viewInvB;
+    private JButton viewInvB, totB, viewCartB;
     
-    private JLabel totL;
-    
+    //private JLabel;
+    private ViewCartButtonHandler vcHandler;
     private ViewInvButtonHandler viHandler;
+    private TotalButtonHandler totHandler;
     
     public Order(){
-    totL = new JLabel("Total:" , SwingConstants.LEFT);
-    
+    //= new JLabel("Total:" , SwingConstants.LEFT);
+        
+        totB = new JButton("Total");
+        totB.setSize(20,20);
+        totHandler = new TotalButtonHandler();
+        totB.addActionListener(totHandler);
+        
         viewInvB = new JButton("View Inventory");
         viewInvB.setSize(20,20);
         viHandler = new ViewInvButtonHandler();
         viewInvB.addActionListener(viHandler);
         
+        viewCartB = new JButton("View Cart");
+        viewCartB.setSize(20,20);
+        vcHandler = new ViewCartButtonHandler();
+        viewCartB.addActionListener(vcHandler);
+        
         SpringLayout layout = new SpringLayout();
         Container pane = getContentPane();
         pane.setLayout(layout);
-        pane.add(totL);
+        pane.add(totB);
         pane.add(viewInvB);
+        pane.add(viewCartB);
         
-        layout.putConstraint(SpringLayout.WEST, totL, 75, SpringLayout.WEST, pane);
-        layout.putConstraint(SpringLayout.NORTH, totL, 20, SpringLayout.NORTH, pane);
-        layout.putConstraint(SpringLayout.WEST, viewInvB, 75, SpringLayout.WEST, pane);
-        layout.putConstraint(SpringLayout.NORTH, viewInvB, 40, SpringLayout.NORTH, pane);
+        layout.putConstraint(SpringLayout.WEST, totB, 260, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.NORTH, totB, 140, SpringLayout.NORTH, pane);
+        layout.putConstraint(SpringLayout.WEST, viewInvB, 20, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.NORTH, viewInvB, 20, SpringLayout.NORTH, pane);
+        layout.putConstraint(SpringLayout.WEST, viewCartB, 250, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.NORTH, viewCartB, 20, SpringLayout.NORTH, pane);
         
+        this.setSize(WIDTH, HEIGHT);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    private static class ViewCartButtonHandler implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
+
+    private class TotalButtonHandler implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
     }
     private class ViewInvButtonHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            //Inventory inv = new Inventory(); //To change body of generated methods, choose Tools | Templates.
         }
 
     }
