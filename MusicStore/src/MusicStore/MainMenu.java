@@ -20,19 +20,19 @@ public class MainMenu extends JFrame {
      * Need buttons for sale, return, order, trade, buy-back, order/receive
      * inventory, view inventory, logoff
      */
-    private JButton saleB, retB, ordB, tradeB, buyBackB, viewInvB, logoffB;
+    private final JButton saleB, retB, ordB, tradeB, buyBackB, viewInvB, logoffB;
 
     //labels for the buttons
-    private JLabel saleL, retL, ordL, tradeL, buyBackL, viewInvL, logoffL;
+    private final JLabel saleL, retL, ordL, tradeL, buyBackL, viewInvL, logoffL;
 
     //handlers
-    private SaleButtonHandler sHandler;
-    private ReturnButtonHandler retHandler;
-    private OrderButtonHandler ordHandler;
-    private TradeButtonHandler tradeHandler;
-    private BuyBackButtonHandler bbHandler;
-    private ViewInvButtonHandler viHandler;
-    private LogOffButtonHandler logoffHandler;
+    private final SaleButtonHandler sHandler;
+    private final ReturnButtonHandler retHandler;
+    private final OrderButtonHandler ordHandler;
+    private final TradeButtonHandler tradeHandler;
+    private final BuyBackButtonHandler bbHandler;
+    private final ViewInvButtonHandler viHandler;
+    private final LogOffButtonHandler logoffHandler;
     String username;
 
     public MainMenu(String user) {
@@ -40,13 +40,7 @@ public class MainMenu extends JFrame {
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -174,7 +168,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Trade trade = new Trade();
+            Trade trade = new Trade(username);
         }
     }
 
@@ -193,7 +187,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Inventory inv = new Inventory(username);
+            Inventory inv = new Inventory(username,true);
         }
 
     }

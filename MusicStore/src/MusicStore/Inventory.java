@@ -26,7 +26,7 @@ class Inventory extends JFrame {
     private String[][] stock = new String[25][2];
     private String[] colNames = new String[]{"Name", "Amount"};
 
-    public Inventory(String username) {
+    public Inventory(String username, boolean showBack) {
         this.username = username;
 
         //read stock from file
@@ -63,7 +63,10 @@ class Inventory extends JFrame {
         pane.setLayout(layout);
 
         pane.add(instrTable);
-        pane.add(back);
+        
+        if(showBack){
+            pane.add(back);
+        }
 
         layout.putConstraint(SpringLayout.WEST, instrTable, 110, SpringLayout.WEST, pane);
         layout.putConstraint(SpringLayout.NORTH, instrTable, 40, SpringLayout.NORTH, pane);
