@@ -1,14 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package MusicStore;
+
+import javax.swing.JFrame;
+
 
 /**
  *
  * @author wlzapple, cabatts, ashalbert
  */
-class Trade {
+class Trade extends JFrame {
+
+    private final String username;
+    private final static int WIDTH = 350, HEIGHT = 200;
     
+    
+
+    public Trade(String username) {
+        this.username = username;
+        
+        
+        
+    }
+
+    
+
+    
+
 }
