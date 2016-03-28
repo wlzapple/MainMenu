@@ -15,6 +15,7 @@ import javax.swing.*;
  * @author wlzapple, cabatts, ashalbert
  */
 public class Order extends JFrame{
+    private String username;
     private static final int WIDTH = 350, HEIGHT = 200;
     
     private JButton viewInvB, totB, viewCartB;
@@ -24,8 +25,9 @@ public class Order extends JFrame{
     private ViewInvButtonHandler viHandler;
     private TotalButtonHandler totHandler;
     
-    public Order(){
+    public Order(String username){
     //= new JLabel("Total:" , SwingConstants.LEFT);
+        this.username = username;
         
         totB = new JButton("Total");
         totB.setSize(20,20);
@@ -74,15 +76,17 @@ public class Order extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            Order.this.dispose(); 
         }
 
     }
     private class ViewInvButtonHandler implements ActionListener {
 
         @Override
-        public void actionPerformed(ActionEvent e) {
-            Inventory inv = new Inventory(); //To change body of generated methods, choose Tools | Templates.
+        public void actionPerformed(ActionEvent e) {         
+            Inventory inv = new Inventory(username);
+            
+            //To change body of generated methods, choose Tools | Templates.
         }
 
     }

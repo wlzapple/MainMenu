@@ -165,7 +165,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Order order = new Order();
+            Order order = new Order(username);
         }
 
     }
