@@ -134,8 +134,8 @@ public class BuyBack extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (options.getSelectedIndex() != -1){
-                if (conds.getSelectedIndex() != -1){
+            if (options.getSelectedIndex() != -1) {
+                if (conds.getSelectedIndex() != -1) {
                     transact.setEnabled(true);
                 }
             }

@@ -187,7 +187,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Inventory inv = new Inventory(username,true);
+            Inventory inv = new Inventory(username, true);
         }
 
     }

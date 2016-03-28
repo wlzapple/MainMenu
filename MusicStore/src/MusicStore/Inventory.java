@@ -63,8 +63,8 @@ class Inventory extends JFrame {
         pane.setLayout(layout);
 
         pane.add(instrTable);
-        
-        if(showBack){
+
+        if (showBack) {
             pane.add(back);
         }
 

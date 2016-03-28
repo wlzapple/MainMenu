@@ -158,7 +158,7 @@ public class Sale extends JFrame {
             pane.add(transact);
             pane.add(remove);
             pane.add(checkOut);
-            
+
             layout.putConstraint(SpringLayout.WEST, back, 50, SpringLayout.WEST, pane);
             layout.putConstraint(SpringLayout.SOUTH, back, -25, SpringLayout.SOUTH, pane);
             layout.putConstraint(SpringLayout.WEST, remove, 200, SpringLayout.WEST, pane);
@@ -189,7 +189,7 @@ public class Sale extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 Transaction.this.dispose();
                 JOptionPane.showMessageDialog(null, "Your total is: " + "$X");
                 MainMenu mainMenu = new MainMenu(username);
