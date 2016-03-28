@@ -1,11 +1,7 @@
 package MusicStore;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
@@ -13,13 +9,15 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  *
  * @author wlzapple, cabatts, ashalbert
  */
-public class Order extends JFrame{
+public class Order extends JFrame {
+
     private final static int WIDTH = 500, HEIGHT = 250;
     private JButton back, addTC, transact;
     private JLabel backL, addL, transactL;
     private backButtonHandler backBH;
     private addButtonHandler addBH;
     private transactButtonHandler transactBH;
+    private Inventory inv;
     String username;
     String[] cart = new String[25];
     int i = 0;
@@ -36,7 +34,7 @@ public class Order extends JFrame{
 
     public Order(String username) {
         this.username = username;
-        Inventory inv = new Inventory(username, false);
+        inv = new Inventory(username, false);
         inv.setLocation(250, 200);
         this.setLocation(700, 300);
         this.getContentPane().setBackground(new Color(0, 129, 172));
@@ -90,7 +88,8 @@ public class Order extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setVisible(false);
+            Order.this.dispose();
+            inv.dispose();
             MainMenu mainMenu = new MainMenu(username);
         }
     }
@@ -109,6 +108,7 @@ public class Order extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             Transaction transact = new Transaction(cart);
+            inv.dispose();
         }
     }
 
@@ -214,5 +214,5 @@ public class Order extends JFrame{
         }
 
     }
-    
-    }
+
+}
