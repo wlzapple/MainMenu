@@ -36,7 +36,7 @@ public class Order extends JFrame{
 
     public Order(String username) {
         this.username = username;
-        Inventory inv = new Inventory(username);
+        Inventory inv = new Inventory(username, false);
         inv.setLocation(250, 200);
         this.setLocation(700, 300);
         this.getContentPane().setBackground(new Color(0, 129, 172));
