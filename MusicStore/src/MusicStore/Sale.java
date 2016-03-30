@@ -2,9 +2,7 @@ package MusicStore;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.logging.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  *
@@ -18,8 +16,8 @@ public class Sale extends JFrame {
     private addButtonHandler addBH;
     private transactButtonHandler transactBH;
     private String username;
-    String[] cart = new String[25];
-    int i = 0;
+    private String[] cart = new String[25];
+    private int i = 0;
 
     private String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
@@ -28,11 +26,11 @@ public class Sale extends JFrame {
         "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"
     };
 
-    JComboBox<String> instrumentList;
-    String selectedInstrument;
+    private JComboBox<String> instrumentList;
+    private String selectedInstrument;
 
-    public Sale(String user) {
-        username = user;
+    public Sale(String username) {
+        username = username;
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
@@ -95,9 +93,11 @@ public class Sale extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            cart[i] = (String) instrumentList.getSelectedItem();
-            transact.setEnabled(true);
-            i++;
+            if (instrumentList.getSelectedIndex() != -1) {
+                cart[i] = (String) instrumentList.getSelectedItem();
+                transact.setEnabled(true);
+                i++;
+            }
         }
     }
 
@@ -116,8 +116,8 @@ public class Sale extends JFrame {
         private backButtonHandler backBH;
         private transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
-        JComboBox<String> checkOut;
-        String item;
+        private JComboBox<String> checkOut;
+        private String item;
 
         public Transaction(String[] cart) {
 
