@@ -22,9 +22,6 @@ public class MainMenu extends JFrame {
      */
     private final JButton saleB, retB, ordB, tradeB, buyBackB, viewInvB, logoffB;
 
-    //labels for the buttons
-    private final JLabel saleL, retL, ordL, tradeL, buyBackL, viewInvL, logoffL;
-
     //handlers
     private final SaleButtonHandler sHandler;
     private final ReturnButtonHandler retHandler;
@@ -33,10 +30,10 @@ public class MainMenu extends JFrame {
     private final BuyBackButtonHandler bbHandler;
     private final ViewInvButtonHandler viHandler;
     private final LogOffButtonHandler logoffHandler;
-    String username;
+    private String username;
 
-    public MainMenu(String user) {
-        username = user;
+    public MainMenu(String username) {
+        this.username = username;
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
@@ -46,13 +43,6 @@ public class MainMenu extends JFrame {
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
-        saleL = new JLabel("Make a Sale", SwingConstants.LEFT);
-        retL = new JLabel("Make a Return", SwingConstants.LEFT);
-        ordL = new JLabel("Order Inventory", SwingConstants.LEFT);
-        tradeL = new JLabel("Make a Trade", SwingConstants.LEFT);
-        buyBackL = new JLabel("BuyBack Item", SwingConstants.LEFT);
-        viewInvL = new JLabel("View Inventory", SwingConstants.LEFT);
-        logoffL = new JLabel("Make a Sale", SwingConstants.LEFT);
 
         //assign handlers to buttons, add ActionListeners
         saleB = new JButton("Sales");

@@ -36,6 +36,7 @@ class ReturnItem extends JFrame {
 
     public ReturnItem(String username) {
         this.username = username;
+        this.getContentPane().setBackground(new Color(0, 129, 172));
         //ask if they have a receipt
         int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt?", "Receipt", JOptionPane.YES_NO_OPTION);
         if (receiptYN != JOptionPane.YES_OPTION) {

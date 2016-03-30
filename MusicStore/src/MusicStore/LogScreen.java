@@ -41,7 +41,8 @@ public class LogScreen extends JFrame {
         exit.addActionListener(exitBH);
 
         this.setTitle("The Sound of Music");
-
+        this.getContentPane().setBackground(new Color(0, 129, 172));
+        
         SpringLayout layout = new SpringLayout();
         Container pane = getContentPane();
         pane.setLayout(layout);
