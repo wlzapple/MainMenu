@@ -30,7 +30,7 @@ public class Sale extends JFrame {
     private String selectedInstrument;
 
     public Sale(String username) {
-        username = username;
+        this.username = username;
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
