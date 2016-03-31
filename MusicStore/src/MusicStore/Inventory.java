@@ -28,7 +28,7 @@ class Inventory extends JFrame {
 
     public Inventory(String username, boolean showBack) {
         this.username = username;
-
+        this.getContentPane().setBackground(new Color(0, 129, 172));
         //read stock from file
         File file = new File("src/MusicStore/Stock.txt");
 
@@ -63,8 +63,8 @@ class Inventory extends JFrame {
         pane.setLayout(layout);
 
         pane.add(instrTable);
-        
-        if(showBack){
+
+        if (showBack) {
             pane.add(back);
         }
 
@@ -73,6 +73,7 @@ class Inventory extends JFrame {
         layout.putConstraint(SpringLayout.WEST, back, 25, SpringLayout.WEST, pane);
         layout.putConstraint(SpringLayout.SOUTH, back, -25, SpringLayout.SOUTH, pane);
 
+        this.setTitle("Stock");
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);
         this.setVisible(true);

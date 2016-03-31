@@ -1,27 +1,24 @@
 package MusicStore;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
  *
  * @author wlzapple, cabatts, ashalbert
  */
-public class Order extends JFrame{
+public class Order extends JFrame {
+
     private final static int WIDTH = 500, HEIGHT = 250;
     private JButton back, addTC, transact;
     private backButtonHandler backBH;
     private addButtonHandler addBH;
     private transactButtonHandler transactBH;
-    String username;
-    String[] cart = new String[25];
-    int i = 0;
+    private Inventory inv;
+    private String username;
+    private String[] cart = new String[25];
+    private int i = 0;
 
     private String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
@@ -35,7 +32,7 @@ public class Order extends JFrame{
 
     public Order(String username) {
         this.username = username;
-        Inventory inv = new Inventory(username, false);
+        inv = new Inventory(username, false);
         inv.setLocation(250, 200);
         this.setLocation(700, 300);
         this.getContentPane().setBackground(new Color(0, 129, 172));
@@ -90,7 +87,8 @@ public class Order extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setVisible(false);
+            Order.this.dispose();
+            inv.dispose();
             MainMenu mainMenu = new MainMenu(username);
         }
     }
@@ -99,9 +97,17 @@ public class Order extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
             cart[i] = (String) instrumentList.getSelectedItem();
             i++;
             transact.setEnabled(true);
+=======
+            if (instrumentList.getSelectedIndex() != -1) {
+                cart[i] = (String) instrumentList.getSelectedItem();
+                transact.setEnabled(true);
+                i++;
+            }
+>>>>>>> zapple94/master
         }
     }
 
@@ -110,6 +116,7 @@ public class Order extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             Transaction transact = new Transaction(cart);
+            inv.dispose();
         }
     }
 
@@ -117,24 +124,24 @@ public class Order extends JFrame{
 
         private final static int WIDTH = 500, HEIGHT = 250;
         private JButton back, transact, remove;
+<<<<<<< HEAD
+=======
+        
+>>>>>>> zapple94/master
         private backButtonHandler backBH;
         private transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
-        JComboBox<String> checkOut;
-        String item;
+        private JComboBox<String> checkOut;
+        private String item;
 
         public Transaction(String[] cart) {
-
+            
             Order.this.dispose();
 
-            JOptionPane.showMessageDialog(null, "Confirm with customer that cart contents"
+            JOptionPane.showMessageDialog(null, "Confirm with supplier that cart contents"
                     + " are correct.");
 
             this.getContentPane().setBackground(new Color(0, 129, 172));
-
-            backL = new JLabel("Back to Sale", SwingConstants.LEFT);
-            transactL = new JLabel("Transact", SwingConstants.LEFT);
-            removeL = new JLabel("Remove Item", SwingConstants.LEFT);
 
             checkOut = new JComboBox(cart);
             item = (String) checkOut.getSelectedItem();
@@ -214,5 +221,5 @@ public class Order extends JFrame{
         }
 
     }
-    
-    }
+
+}
