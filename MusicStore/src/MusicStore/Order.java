@@ -16,7 +16,6 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 public class Order extends JFrame{
     private final static int WIDTH = 500, HEIGHT = 250;
     private JButton back, addTC, transact;
-    private JLabel backL, addL, transactL;
     private backButtonHandler backBH;
     private addButtonHandler addBH;
     private transactButtonHandler transactBH;
@@ -71,6 +70,7 @@ public class Order extends JFrame{
         pane.add(addTC);
         pane.add(transact);
         pane.add(instrumentList);
+        transact.setEnabled(false);
 
         layout.putConstraint(SpringLayout.WEST, back, 50, SpringLayout.WEST, pane);
         layout.putConstraint(SpringLayout.SOUTH, back, -25, SpringLayout.SOUTH, pane);
@@ -101,6 +101,7 @@ public class Order extends JFrame{
         public void actionPerformed(ActionEvent e) {
             cart[i] = (String) instrumentList.getSelectedItem();
             i++;
+            transact.setEnabled(true);
         }
     }
 
@@ -116,7 +117,6 @@ public class Order extends JFrame{
 
         private final static int WIDTH = 500, HEIGHT = 250;
         private JButton back, transact, remove;
-        private JLabel backL, transactL, removeL;
         private backButtonHandler backBH;
         private transactButtonHandler transactBH;
         private removeButtonHandler removeBH;

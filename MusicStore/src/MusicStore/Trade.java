@@ -16,7 +16,7 @@ class Trade extends JFrame {
 
     public Trade(String username) {
         this.username = username;
-        
+     
         
         
     }
