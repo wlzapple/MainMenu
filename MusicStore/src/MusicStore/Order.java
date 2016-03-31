@@ -27,8 +27,8 @@ public class Order extends JFrame {
         "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"
     };
 
-    JComboBox<String> instrumentList;
-    String selectedInstrument;
+    private JComboBox<String> instrumentList;
+    private String selectedInstrument;
 
     public Order(String username) {
         this.username = username;
