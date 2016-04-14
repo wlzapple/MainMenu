@@ -14,7 +14,7 @@ public class BuyBack extends JFrame {
     private JButton back, transact;
     private JLabel itemL, condL;
     private backButtonHandler backBH;
-    private BoxValueHandler select;
+    private BoxValueChangeHandler select;
     private transactButtonHandler transactBH;
     private String username;
 
@@ -42,7 +42,7 @@ public class BuyBack extends JFrame {
             MainMenu mainMenu = new MainMenu(this.username);
         } else {
 
-            select = new BoxValueHandler();
+            select = new BoxValueChangeHandler();
             options = new JComboBox<>(instruments);
             options.setSelectedIndex(-1);
             options.addActionListener(select);
@@ -121,7 +121,7 @@ public class BuyBack extends JFrame {
 
     }
 
-    private class BoxValueHandler implements ActionListener {
+    private class BoxValueChangeHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
