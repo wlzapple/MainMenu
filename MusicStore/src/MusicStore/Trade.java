@@ -34,11 +34,7 @@ class Trade extends JFrame {
 
     public Trade(String username) {
         this.username = username;
-<<<<<<< HEAD
-     
-        
-        
-=======
+
         this.getContentPane().setBackground(new Color(0, 129, 172));
         int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt?", "Receipt", JOptionPane.YES_NO_OPTION);
         if (receiptYN != JOptionPane.YES_OPTION) {
@@ -121,7 +117,7 @@ class Trade extends JFrame {
             Trade.this.dispose();
             MainMenu mainMenu = new MainMenu(username);
         }
->>>>>>> zapple94/master
+
     }
 
     private class FinalButtonHandler implements ActionListener {

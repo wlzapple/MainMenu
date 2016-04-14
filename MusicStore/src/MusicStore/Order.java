@@ -97,17 +97,17 @@ public class Order extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
+
             cart[i] = (String) instrumentList.getSelectedItem();
             i++;
             transact.setEnabled(true);
-=======
+
             if (instrumentList.getSelectedIndex() != -1) {
                 cart[i] = (String) instrumentList.getSelectedItem();
                 transact.setEnabled(true);
                 i++;
             }
->>>>>>> zapple94/master
+
         }
     }
 
@@ -124,10 +124,10 @@ public class Order extends JFrame {
 
         private final static int WIDTH = 500, HEIGHT = 250;
         private JButton back, transact, remove;
-<<<<<<< HEAD
-=======
+
+
         
->>>>>>> zapple94/master
+
         private backButtonHandler backBH;
         private transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
