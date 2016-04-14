@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 class ReturnItem extends JFrame {
 
-    private String username;
+    private final String username;
 
     private final static int WIDTH = 350;
     private final static int HEIGHT = 200;
