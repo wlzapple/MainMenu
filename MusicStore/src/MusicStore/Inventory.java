@@ -17,25 +17,22 @@ class Inventory extends JFrame {
     private final static int WIDTH = 425;
     private final static int HEIGHT = 500;
 
-    private final JTable instrTable;
+    private JTable instrTable;
 
-    private final JButton back;
+    private JButton back;
 
-    private final backButtonHandler backBH;
+    private backButtonHandler backBH;
 
-    private String[][] stock = new String[26][3];
+    public static String[][] stock = new String[26][3];
     private String[] colNames = new String[]{"Name", "Amount", "Price"};
-
-    public Inventory(String username, boolean showBack) {
-        this.username = username;
-        this.getContentPane().setBackground(new Color(0, 129, 172));
-        //read stock from file
+    
+    public Inventory(){
         File file = new File("src/MusicStore/Stock.txt");
         stock[0][0] = "Name";
         stock[0][1] = "Quantity";
         stock[0][2] = "Price ($)";
-            
-        try {
+        
+       try {
             Scanner scan = new Scanner(file);
             scan.useDelimiter(":");
             int i = 1;
@@ -51,13 +48,42 @@ class Inventory extends JFrame {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
+        
+        
+    }
+
+    public Inventory(String username, boolean showBack) {
+        this.username = username;
+        this.getContentPane().setBackground(new Color(0, 129, 172));
+        //read stock from file
+//        File file = new File("src/MusicStore/Stock.txt");
+//        stock[0][0] = "Name";
+//        stock[0][1] = "Quantity";
+//        stock[0][2] = "Price ($)";
+//            
+//        try {
+//            Scanner scan = new Scanner(file);
+//            scan.useDelimiter(":");
+//            int i = 1;
+//            while (scan.hasNextLine()) {
+//                stock[i][0] = scan.next();
+//                scan.skip(":");
+//                stock[i][1] = scan.next();
+//                scan.skip(":");
+//                stock[i][2] = scan.nextLine();
+//                i++;
+//            }
+//            scan.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File not found");
+//        }
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
         instrTable = new JTable(stock, colNames);
         instrTable.getColumn("Name").setPreferredWidth(120);
         instrTable.getColumn("Amount").setPreferredWidth(70);
-        instrTable.getColumn("Price").setPreferredWidth(50);
+        instrTable.getColumn("Price").setPreferredWidth(60);
 
         back = new JButton("Back");
         backBH = new backButtonHandler();

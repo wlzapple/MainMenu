@@ -26,6 +26,7 @@ class ReturnItem extends JFrame {
         "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"};
 
     private final String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
+    private final double[] percent = {.75, .50};
 
     private JComboBox<String> instrumentBox;
     private JComboBox<String> conds;
