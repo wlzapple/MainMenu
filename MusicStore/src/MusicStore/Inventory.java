@@ -17,11 +17,11 @@ class Inventory extends JFrame {
     private final static int WIDTH = 425;
     private final static int HEIGHT = 500;
 
-    private JTable instrTable;
+    private final JTable instrTable;
 
-    private JButton back;
+    private final JButton back;
 
-    private backButtonHandler backBH;
+    private final backButtonHandler backBH;
 
     private String[][] stock = new String[26][3];
     private String[] colNames = new String[]{"Name", "Amount", "Price"};
