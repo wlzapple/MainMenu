@@ -16,7 +16,7 @@ public class BuyBack extends JFrame {
     private backButtonHandler backBH;
     private BoxValueChangeHandler select;
     private transactButtonHandler transactBH;
-    private String username;
+    private final String username;
 
     private final String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
@@ -25,7 +25,7 @@ public class BuyBack extends JFrame {
         "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"
     };
 
-    private String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
+    private final String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
 
     private JComboBox<String> options;
     private JComboBox<String> conds;

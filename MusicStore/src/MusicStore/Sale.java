@@ -11,23 +11,23 @@ import javax.swing.*;
 public class Sale extends JFrame {
 
     private final static int WIDTH = 500, HEIGHT = 250;
-    private JButton back, addTC, transact;
-    private backButtonHandler backBH;
-    private addButtonHandler addBH;
-    private transactButtonHandler transactBH;
-    private String username;
-    private String[] cart = new String[25];
+    private final JButton back, addTC, transact;
+    private final backButtonHandler backBH;
+    private final addButtonHandler addBH;
+    private final transactButtonHandler transactBH;
+    private final String username;
+    private final String[] cart = new String[25];
     private int i = 0;
 
-    private String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
+    private final String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
         "Stands", "Amplifiers", "Guitar Picks", "Baritone Sax", "Timpani",
         "Cymbals", "CDs", "Violin", "Piano", "Ocarina", "Acoustic Guitar",
         "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"
     };
 
-    private JComboBox<String> instrumentList;
-    private String selectedInstrument;
+    private final JComboBox<String> instrumentList;
+    private final String selectedInstrument;
 
     public Sale(String username) {
         this.username = username;
@@ -112,12 +112,12 @@ public class Sale extends JFrame {
     private class Transaction extends JFrame {
 
         private final static int WIDTH = 500, HEIGHT = 250;
-        private JButton back, transact, remove;
-        private backButtonHandler backBH;
-        private transactButtonHandler transactBH;
+        private final JButton back, transact, remove;
+        private final backButtonHandler backBH;
+        private final transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
-        private JComboBox<String> checkOut;
-        private String item;
+        private final JComboBox<String> checkOut;
+        private final String item;
 
         public Transaction(String[] cart) {
 

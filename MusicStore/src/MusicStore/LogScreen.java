@@ -13,15 +13,15 @@ public class LogScreen extends JFrame {
     private final static int WIDTH = 350;
     private final static int HEIGHT = 200;
 
-    private JLabel usernameLBL, passwordLBL;
+    private final JLabel usernameLBL, passwordLBL;
 
-    private JTextField username, password;
+    private final JTextField username, password;
 
-    private JButton login, exit;
+    private final JButton login, exit;
 
     //Button handlers:
-    private LoginButtonHandler logBH;
-    private ExitButtonHandler exitBH;
+    private final LoginButtonHandler logBH;
+    private final ExitButtonHandler exitBH;
 
     public LogScreen() {
         usernameLBL = new JLabel("Username: ", SwingConstants.LEFT);
