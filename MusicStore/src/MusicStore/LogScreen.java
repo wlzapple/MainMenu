@@ -54,6 +54,8 @@ public class LogScreen extends JFrame {
         pane.add(login);
         pane.add(exit);
 
+        this.getRootPane().setDefaultButton(login);
+        
         layout.putConstraint(SpringLayout.WEST, usernameLBL, 75, SpringLayout.WEST, pane);
         layout.putConstraint(SpringLayout.NORTH, usernameLBL, 20, SpringLayout.NORTH, pane);
         layout.putConstraint(SpringLayout.WEST, passwordLBL, 75, SpringLayout.WEST, pane);

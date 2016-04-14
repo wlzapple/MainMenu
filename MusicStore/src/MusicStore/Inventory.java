@@ -14,7 +14,7 @@ class Inventory extends JFrame {
 
     private String username;
 
-    private final static int WIDTH = 350;
+    private final static int WIDTH = 425;
     private final static int HEIGHT = 500;
 
     private JTable instrTable;
@@ -23,23 +23,28 @@ class Inventory extends JFrame {
 
     private backButtonHandler backBH;
 
-    private String[][] stock = new String[25][2];
-    private String[] colNames = new String[]{"Name", "Amount"};
+    private String[][] stock = new String[26][3];
+    private String[] colNames = new String[]{"Name", "Amount", "Price"};
 
     public Inventory(String username, boolean showBack) {
         this.username = username;
         this.getContentPane().setBackground(new Color(0, 129, 172));
         //read stock from file
         File file = new File("src/MusicStore/Stock.txt");
-
+        stock[0][0] = "Name";
+        stock[0][1] = "Quantity";
+        stock[0][2] = "Price ($)";
+            
         try {
             Scanner scan = new Scanner(file);
             scan.useDelimiter(":");
-            int i = 0;
+            int i = 1;
             while (scan.hasNextLine()) {
                 stock[i][0] = scan.next();
                 scan.skip(":");
-                stock[i][1] = scan.nextLine();
+                stock[i][1] = scan.next();
+                scan.skip(":");
+                stock[i][2] = scan.nextLine();
                 i++;
             }
             scan.close();
@@ -50,8 +55,9 @@ class Inventory extends JFrame {
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
         instrTable = new JTable(stock, colNames);
-        instrTable.getColumn("Name").setPreferredWidth(100);
-        instrTable.getColumn("Amount").setPreferredWidth(30);
+        instrTable.getColumn("Name").setPreferredWidth(120);
+        instrTable.getColumn("Amount").setPreferredWidth(70);
+        instrTable.getColumn("Price").setPreferredWidth(50);
 
         back = new JButton("Back");
         backBH = new backButtonHandler();
