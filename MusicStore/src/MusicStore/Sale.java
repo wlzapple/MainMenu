@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
+import java.util.Scanner;
 
 /**
  *
@@ -18,7 +19,7 @@ public class Sale extends JFrame {
     private final transactButtonHandler transactBH;
     private final String username;
     private final String[] cart = new String[25];
-    private int i = 0;
+    private int i = 0, quantity = 0;
 
     private final String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
@@ -94,6 +95,13 @@ public class Sale extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            /*for (int j = 0; cart[j] != null; j++) {
+                if (instrumentList.getSelectedItem() == cart[j]);
+                quantity ++;
+                if (quantity > ) {
+                    
+                }
+            }*/
             if (instrumentList.getSelectedIndex() != -1) {
                 cart[i] = (String) instrumentList.getSelectedItem();
                 transact.setEnabled(true);
@@ -117,19 +125,10 @@ public class Sale extends JFrame {
         private final backButtonHandler backBH;
         private final transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
-<<<<<<< HEAD
-<<<<<<< HEAD
-        private JComboBox<String> checkOut;
-        private String item;
+        private final JComboBox<String> checkOut;
+        private final String item;
+        private int total;
         File file = new File("src/MusicStore/Stock.txt");
-=======
-        private final JComboBox<String> checkOut;
-        private final String item;
->>>>>>> zapple94/master
-=======
-        private final JComboBox<String> checkOut;
-        private final String item;
->>>>>>> zapple94/master
 
         public Transaction(String[] cart) {
 
@@ -186,6 +185,7 @@ public class Sale extends JFrame {
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         }
+    
 
         private class backButtonHandler implements ActionListener {
 
@@ -202,6 +202,9 @@ public class Sale extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                while (cart[i] != null){
+                    //total += ;
+                }
                 Transaction.this.dispose();
                 JOptionPane.showMessageDialog(null, "Your total is: " + "$X");
                 MainMenu mainMenu = new MainMenu(username);
