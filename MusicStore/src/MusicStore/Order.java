@@ -97,11 +97,6 @@ public class Order extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
-            cart[i] = (String) instrumentList.getSelectedItem();
-            i++;
-            transact.setEnabled(true);
-
             if (instrumentList.getSelectedIndex() != -1) {
                 cart[i] = (String) instrumentList.getSelectedItem();
                 transact.setEnabled(true);
