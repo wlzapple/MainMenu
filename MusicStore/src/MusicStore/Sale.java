@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package MusicStore;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.logging.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  *
@@ -22,10 +15,9 @@ public class Sale extends JFrame {
     private backButtonHandler backBH;
     private addButtonHandler addBH;
     private transactButtonHandler transactBH;
-    private BoxValueChangeHandler select;
     private String username;
-    String[] cart = new String[25];
-    int i = 0;
+    private String[] cart = new String[25];
+    private int i = 0;
 
     private String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
@@ -34,19 +26,17 @@ public class Sale extends JFrame {
         "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"
     };
 
-    JComboBox<String> instrumentList;
-    String selectedInstrument;
+    private JComboBox<String> instrumentList;
+    private String selectedInstrument;
 
-    public Sale(String user) {
-        username = user;
+    public Sale(String username) {
+        this.username = username;
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
-        select = new BoxValueChangeHandler();
         instrumentList = new JComboBox<>(instruments);
         selectedInstrument = (String) instrumentList.getSelectedItem();
         instrumentList.setSelectedIndex(-1);
-        instrumentList.addActionListener(select);
 
         back = new JButton("Back");
         back.setSize(20, 20);
@@ -90,17 +80,6 @@ public class Sale extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    private class BoxValueChangeHandler implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (cart[0] != null){
-                    transact.setEnabled(true);
-                }
-        }
-
-    }
-
     private class backButtonHandler implements ActionListener {
 
         @Override
@@ -114,8 +93,11 @@ public class Sale extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            cart[i] = (String) instrumentList.getSelectedItem();
-            i++;
+            if (instrumentList.getSelectedIndex() != -1) {
+                cart[i] = (String) instrumentList.getSelectedItem();
+                transact.setEnabled(true);
+                i++;
+            }
         }
     }
 
@@ -134,8 +116,8 @@ public class Sale extends JFrame {
         private backButtonHandler backBH;
         private transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
-        JComboBox<String> checkOut;
-        String item;
+        private JComboBox<String> checkOut;
+        private String item;
 
         public Transaction(String[] cart) {
 
@@ -176,7 +158,7 @@ public class Sale extends JFrame {
             pane.add(transact);
             pane.add(remove);
             pane.add(checkOut);
-            
+
             layout.putConstraint(SpringLayout.WEST, back, 50, SpringLayout.WEST, pane);
             layout.putConstraint(SpringLayout.SOUTH, back, -25, SpringLayout.SOUTH, pane);
             layout.putConstraint(SpringLayout.WEST, remove, 200, SpringLayout.WEST, pane);
@@ -207,7 +189,7 @@ public class Sale extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 Transaction.this.dispose();
                 JOptionPane.showMessageDialog(null, "Your total is: " + "$X");
                 MainMenu mainMenu = new MainMenu(username);
