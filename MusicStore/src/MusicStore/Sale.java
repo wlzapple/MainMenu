@@ -3,6 +3,7 @@ package MusicStore;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.*;
 
 /**
  *
@@ -118,6 +119,7 @@ public class Sale extends JFrame {
         private removeButtonHandler removeBH;
         private JComboBox<String> checkOut;
         private String item;
+        File file = new File("src/MusicStore/Stock.txt");
 
         public Transaction(String[] cart) {
 
