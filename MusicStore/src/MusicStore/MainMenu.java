@@ -20,45 +20,29 @@ public class MainMenu extends JFrame {
      * Need buttons for sale, return, order, trade, buy-back, order/receive
      * inventory, view inventory, logoff
      */
-    private JButton saleB, retB, ordB, tradeB, buyBackB, viewInvB, logoffB;
-
-    //labels for the buttons
-    private JLabel saleL, retL, ordL, tradeL, buyBackL, viewInvL, logoffL;
+    private final JButton saleB, retB, ordB, tradeB, buyBackB, viewInvB, logoffB;
 
     //handlers
-    private SaleButtonHandler sHandler;
-    private ReturnButtonHandler retHandler;
-    private OrderButtonHandler ordHandler;
-    private TradeButtonHandler tradeHandler;
-    private BuyBackButtonHandler bbHandler;
-    private ViewInvButtonHandler viHandler;
-    private LogOffButtonHandler logoffHandler;
-    String username;
+    private final SaleButtonHandler sHandler;
+    private final ReturnButtonHandler retHandler;
+    private final OrderButtonHandler ordHandler;
+    private final TradeButtonHandler tradeHandler;
+    private final BuyBackButtonHandler bbHandler;
+    private final ViewInvButtonHandler viHandler;
+    private final LogOffButtonHandler logoffHandler;
+    private String username;
 
-    public MainMenu(String user) {
-        username = user;
+    public MainMenu(String username) {
+        this.username = username;
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
-        saleL = new JLabel("Make a Sale", SwingConstants.LEFT);
-        retL = new JLabel("Make a Return", SwingConstants.LEFT);
-        ordL = new JLabel("Order Inventory", SwingConstants.LEFT);
-        tradeL = new JLabel("Make a Trade", SwingConstants.LEFT);
-        buyBackL = new JLabel("BuyBack Item", SwingConstants.LEFT);
-        viewInvL = new JLabel("View Inventory", SwingConstants.LEFT);
-        logoffL = new JLabel("Make a Sale", SwingConstants.LEFT);
 
         //assign handlers to buttons, add ActionListeners
         saleB = new JButton("Sales");
@@ -103,7 +87,6 @@ public class MainMenu extends JFrame {
         Container pane = getContentPane();
         pane.setLayout(layout);
 
-        
         pane.add(saleB);
         pane.add(retB);
         pane.add(ordB);
@@ -126,6 +109,12 @@ public class MainMenu extends JFrame {
         layout.putConstraint(SpringLayout.SOUTH, viewInvB, -25, SpringLayout.SOUTH, pane);
         layout.putConstraint(SpringLayout.EAST, logoffB, -25, SpringLayout.EAST, pane);
         layout.putConstraint(SpringLayout.SOUTH, logoffB, -25, SpringLayout.SOUTH, pane);
+
+        if (!"manager".equalsIgnoreCase(username)) {
+            tradeB.setEnabled(false);
+            buyBackB.setEnabled(false);
+            ordB.setEnabled(false);
+        }
 
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);
@@ -159,7 +148,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Order order = new Order();
+            Order order = new Order(username);
         }
 
     }
@@ -169,7 +158,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Trade trade = new Trade();
+            Trade trade = new Trade(username);
         }
     }
 
@@ -178,7 +167,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            BuyBack buyback = new BuyBack();
+            BuyBack buyback = new BuyBack(username);
         }
 
     }
@@ -188,7 +177,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Inventory inv = new Inventory(username);
+            Inventory inv = new Inventory(username, true);
         }
 
     }

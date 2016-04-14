@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 class ReturnItem extends JFrame {
 
-    private String username;
+    private final String username;
 
     private final static int WIDTH = 350;
     private final static int HEIGHT = 200;
@@ -26,6 +26,7 @@ class ReturnItem extends JFrame {
         "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"};
 
     private final String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
+    private final double[] percent = {.75, .50};
 
     private JComboBox<String> instrumentBox;
     private JComboBox<String> conds;
@@ -36,11 +37,12 @@ class ReturnItem extends JFrame {
 
     public ReturnItem(String username) {
         this.username = username;
+        this.getContentPane().setBackground(new Color(0, 129, 172));
         //ask if they have a receipt
-        int rYN = JOptionPane.YES_NO_OPTION;
-        int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt?", "Receipt", rYN);
+        int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt?", "Receipt", JOptionPane.YES_NO_OPTION);
         if (receiptYN != JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Inform the customer that we cannot accept an item without a receipt.", "", JOptionPane.PLAIN_MESSAGE);
+            MainMenu mainMenu = new MainMenu(username);
         } else {
 
             select = new BoxValueChangeHandler();
