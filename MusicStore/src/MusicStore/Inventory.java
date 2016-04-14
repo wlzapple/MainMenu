@@ -14,7 +14,7 @@ class Inventory extends JFrame {
 
     private String username;
 
-    private final static int WIDTH = 350;
+    private final static int WIDTH = 425;
     private final static int HEIGHT = 500;
 
     private JTable instrTable;
@@ -23,8 +23,8 @@ class Inventory extends JFrame {
 
     private backButtonHandler backBH;
 
-    private String[][] stock = new String[25][2];
-    private String[] colNames = new String[]{"Name", "Amount"};
+    private String[][] stock = new String[25][3];
+    private String[] colNames = new String[]{"Name", "Amount", "Price"};
 
     public Inventory(String username, boolean showBack) {
         this.username = username;
@@ -39,7 +39,9 @@ class Inventory extends JFrame {
             while (scan.hasNextLine()) {
                 stock[i][0] = scan.next();
                 scan.skip(":");
-                stock[i][1] = scan.nextLine();
+                stock[i][1] = scan.next();
+                scan.skip(":");
+                stock[i][2] = scan.nextLine();
                 i++;
             }
             scan.close();
