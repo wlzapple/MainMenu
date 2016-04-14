@@ -118,9 +118,14 @@ public class Sale extends JFrame {
         private final transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
 <<<<<<< HEAD
+<<<<<<< HEAD
         private JComboBox<String> checkOut;
         private String item;
         File file = new File("src/MusicStore/Stock.txt");
+=======
+        private final JComboBox<String> checkOut;
+        private final String item;
+>>>>>>> zapple94/master
 =======
         private final JComboBox<String> checkOut;
         private final String item;
