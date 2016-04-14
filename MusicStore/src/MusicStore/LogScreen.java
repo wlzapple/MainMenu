@@ -93,4 +93,8 @@ public class LogScreen extends JFrame {
         }
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> zapple94/master
