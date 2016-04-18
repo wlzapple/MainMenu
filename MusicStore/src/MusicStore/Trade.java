@@ -134,8 +134,4 @@ class Trade extends JFrame {
 
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> zapple94/master

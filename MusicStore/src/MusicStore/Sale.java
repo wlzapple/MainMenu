@@ -19,7 +19,7 @@ public class Sale extends JFrame {
     private final transactButtonHandler transactBH;
     private final String username;
     private final String[] cart = new String[25];
-    private int i = 0, quantity = 0;
+    private int i = 0, quantity = 0, amount = 0;
 
     private final String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
@@ -95,13 +95,10 @@ public class Sale extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            /*for (int j = 0; cart[j] != null; j++) {
-                if (instrumentList.getSelectedItem() == cart[j]);
-                quantity ++;
-                if (quantity > ) {
-                    
-                }
-            }*/
+            for (int j = 0; j < Inventory.stock.length; j++) {
+                
+            }
+            
             if (instrumentList.getSelectedIndex() != -1) {
                 cart[i] = (String) instrumentList.getSelectedItem();
                 transact.setEnabled(true);
@@ -127,10 +124,21 @@ public class Sale extends JFrame {
         private removeButtonHandler removeBH;
         private final JComboBox<String> checkOut;
         private final String item;
-        private int total;
-        File file = new File("src/MusicStore/Stock.txt");
 
         public Transaction(String[] cart) {
+            String[][] cartContents = new String[25][3];
+            for (int i = 0; cart[i] != null; i++) {
+                cartContents[i][0] = cart[i];
+            }
+            
+            for (int j = 0; cartContents[j][0] != null; j++) {
+                for (int k = 0; k < Inventory.stock.length; k++) {
+                    if (cartContents[j][0].equals(Inventory.stock[k][0])) {
+                        cartContents[j][1] = Inventory.stock[k][1];
+                        cartContents[j][2] = Inventory.stock[k][2];
+                    }
+                }
+            }
 
             Sale.this.dispose();
 

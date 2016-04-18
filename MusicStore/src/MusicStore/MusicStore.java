@@ -13,8 +13,4 @@ public class MusicStore {
         LogScreen login = new LogScreen();
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> zapple94/master

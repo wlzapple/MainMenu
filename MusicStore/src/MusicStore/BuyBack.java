@@ -134,8 +134,4 @@ public class BuyBack extends JFrame {
 
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> zapple94/master

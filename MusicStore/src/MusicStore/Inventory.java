@@ -55,28 +55,6 @@ class Inventory extends JFrame {
     public Inventory(String username, boolean showBack) {
         this.username = username;
         this.getContentPane().setBackground(new Color(0, 129, 172));
-        //read stock from file
-//        File file = new File("src/MusicStore/Stock.txt");
-//        stock[0][0] = "Name";
-//        stock[0][1] = "Quantity";
-//        stock[0][2] = "Price ($)";
-//            
-//        try {
-//            Scanner scan = new Scanner(file);
-//            scan.useDelimiter(":");
-//            int i = 1;
-//            while (scan.hasNextLine()) {
-//                stock[i][0] = scan.next();
-//                scan.skip(":");
-//                stock[i][1] = scan.next();
-//                scan.skip(":");
-//                stock[i][2] = scan.nextLine();
-//                i++;
-//            }
-//            scan.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("File not found");
-//        }
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
