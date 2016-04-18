@@ -10,6 +10,8 @@ import javax.swing.*;
  */
 public class LogScreen extends JFrame {
 
+    public static Inventory stockPrep;
+    
     private final static int WIDTH = 350;
     private final static int HEIGHT = 200;
 
@@ -81,7 +83,7 @@ public class LogScreen extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
-            Inventory stockPrep = new Inventory();
+            stockPrep = new Inventory();
             MainMenu start = new MainMenu(username.getText());
         }
     }
