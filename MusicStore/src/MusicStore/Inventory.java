@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -111,6 +113,35 @@ class Inventory extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+    }
+    
+    public void writeStock(){
+        File file = new File("src/MusicStore/Stock.txt");
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            OutputStreamWriter osw = new OutputStreamWriter(out);
+            Writer w = new BufferedWriter(osw);
+            for (int i = 1; i < 26; i++) {
+                w.write(stock[i][0]+":"+stock[i][1]+":"+stock[i][2]+"\n");
+            }
+            w.close();
+            
+        } catch (IOException e) {
+            System.err.println("Issue writing to file Stock.txt");
+        }
+    }
+    
+    public void invAdd(int index, int amount) {
+       
+    }
+    
+    public boolean checkSale(int index, int amount){
+        
+        return (Integer.parseInt(stock[index][1]) - amount) <= 0;
+    }
+    
+    public boolean checkOrder(int index, int amount){
+        return (Integer.parseInt(stock[index][1]) + amount) > 25;
     }
 
     private class backButtonHandler implements ActionListener {

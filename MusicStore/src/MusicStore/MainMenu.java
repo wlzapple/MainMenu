@@ -13,7 +13,7 @@ import javax.swing.*;
  * @authors wlzapple, cabatts, ashalbert
  */
 public class MainMenu extends JFrame {
-
+    
     private static final int WIDTH = 500, HEIGHT = 250;
 
     /**
@@ -186,6 +186,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            LogScreen.stockPrep.writeStock();
             MainMenu.this.dispose();
             LogScreen restart = new LogScreen();
         }
