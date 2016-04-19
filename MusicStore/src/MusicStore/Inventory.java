@@ -55,10 +55,7 @@ class Inventory extends JFrame {
     public Inventory(String username, boolean showBack) {
         this.username = username;
         this.getContentPane().setBackground(new Color(0, 129, 172));
-<<<<<<< HEAD
-=======
-        
->>>>>>> zapple94/master
+
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
