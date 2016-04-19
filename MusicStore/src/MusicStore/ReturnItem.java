@@ -26,7 +26,7 @@ class ReturnItem extends JFrame {
         "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"};
 
     private final String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
-    private final double[] percent = {.75, .50};
+    private final double[] percent = {1.00, .75, .50};
 
     private JComboBox<String> instrumentBox;
     private JComboBox<String> conds;
@@ -128,8 +128,10 @@ class ReturnItem extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String item = instrumentBox.getSelectedItem().toString();
             String cond = conds.getSelectedItem().toString();
+            LogScreen.stockPrep.invAdd(instrumentBox.getSelectedIndex()+1, 1);
             ReturnItem.this.dispose();
-            JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $X", "", JOptionPane.PLAIN_MESSAGE);
+            double price = Integer.parseInt(Inventory.stock[instrumentBox.getSelectedIndex()+1][2]) * percent[conds.getSelectedIndex()];
+            JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price), "", JOptionPane.PLAIN_MESSAGE);
             MainMenu mainMenu = new MainMenu(username);
 
         }
