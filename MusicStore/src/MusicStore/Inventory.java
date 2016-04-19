@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -57,28 +55,7 @@ class Inventory extends JFrame {
     public Inventory(String username, boolean showBack) {
         this.username = username;
         this.getContentPane().setBackground(new Color(0, 129, 172));
-        //read stock from file
-//        File file = new File("src/MusicStore/Stock.txt");
-//        stock[0][0] = "Name";
-//        stock[0][1] = "Quantity";
-//        stock[0][2] = "Price ($)";
-//            
-//        try {
-//            Scanner scan = new Scanner(file);
-//            scan.useDelimiter(":");
-//            int i = 1;
-//            while (scan.hasNextLine()) {
-//                stock[i][0] = scan.next();
-//                scan.skip(":");
-//                stock[i][1] = scan.next();
-//                scan.skip(":");
-//                stock[i][2] = scan.nextLine();
-//                i++;
-//            }
-//            scan.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("File not found");
-//        }
+        
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
@@ -132,16 +109,24 @@ class Inventory extends JFrame {
     }
     
     public void invAdd(int index, int amount) {
-       
+       int x =  Integer.parseInt(stock[index][1]);
+       x += amount;
+       stock[index][1] = Integer.toString(x);
+    }
+    
+    public void invSub(int index, int amount){
+       int x =  Integer.parseInt(stock[index][1]);
+       x -= amount;
+       stock[index][1] = Integer.toString(x);
     }
     
     public boolean checkSale(int index, int amount){
         
-        return (Integer.parseInt(stock[index][1]) - amount) <= 0;
+        return (Integer.parseInt(stock[index][1]) - amount) >= 0;
     }
     
     public boolean checkOrder(int index, int amount){
-        return (Integer.parseInt(stock[index][1]) + amount) > 25;
+        return (Integer.parseInt(stock[index][1]) + amount) >= 25;
     }
 
     private class backButtonHandler implements ActionListener {
