@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -57,6 +55,10 @@ class Inventory extends JFrame {
     public Inventory(String username, boolean showBack) {
         this.username = username;
         this.getContentPane().setBackground(new Color(0, 129, 172));
+<<<<<<< HEAD
+=======
+        
+>>>>>>> zapple94/master
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
@@ -110,7 +112,15 @@ class Inventory extends JFrame {
     }
     
     public void invAdd(int index, int amount) {
-       
+       int x =  Integer.parseInt(stock[index][1]);
+       x += amount;
+       stock[index][1] = Integer.toString(x);
+    }
+    
+    public void invSub(int index, int amount){
+       int x =  Integer.parseInt(stock[index][1]);
+       x -= amount;
+       stock[index][1] = Integer.toString(x);
     }
     
     public boolean checkSale(int index, int amount){
@@ -119,7 +129,11 @@ class Inventory extends JFrame {
     }
     
     public boolean checkOrder(int index, int amount){
+<<<<<<< HEAD
         return (Integer.parseInt(stock[index][1]) + amount) <= 25;
+=======
+        return (Integer.parseInt(stock[index][1]) + amount) >= 25;
+>>>>>>> zapple94/master
     }
 
     private class backButtonHandler implements ActionListener {
