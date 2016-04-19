@@ -19,7 +19,8 @@ public class Sale extends JFrame {
     private final transactButtonHandler transactBH;
     private final String username;
     private final String[] cart = new String[25];
-    private int i = 0, quantity = 0, amount = 0;
+    private final int[] amount = new int[25];
+    private int i = 0, quantity = 0;
 
     private final String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
@@ -32,6 +33,10 @@ public class Sale extends JFrame {
     private final String selectedInstrument;
 
     public Sale(String username) {
+        for (int j = 0; j < amount.length; j++) {
+            amount[j] = 0;
+        }
+
         this.username = username;
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
@@ -95,14 +100,16 @@ public class Sale extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (int j = 0; j < Inventory.stock.length; j++) {
-                
-            }
-            
             if (instrumentList.getSelectedIndex() != -1) {
-                cart[i] = (String) instrumentList.getSelectedItem();
-                transact.setEnabled(true);
-                i++;
+                if (LogScreen.stockPrep.checkSale(instrumentList.getSelectedIndex() + 1, amount[instrumentList.getSelectedIndex()] + 1)) {
+                    amount[instrumentList.getSelectedIndex()] ++;
+                    cart[i] = (String) instrumentList.getSelectedItem();
+                    transact.setEnabled(true);
+                    i++;
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "We have no more of this item in stock.");
+                }
             }
         }
     }
@@ -126,19 +133,6 @@ public class Sale extends JFrame {
         private final String item;
 
         public Transaction(String[] cart) {
-            String[][] cartContents = new String[25][3];
-            for (int i = 0; cart[i] != null; i++) {
-                cartContents[i][0] = cart[i];
-            }
-            
-            for (int j = 0; cartContents[j][0] != null; j++) {
-                for (int k = 0; k < Inventory.stock.length; k++) {
-                    if (cartContents[j][0].equals(Inventory.stock[k][0])) {
-                        cartContents[j][1] = Inventory.stock[k][1];
-                        cartContents[j][2] = Inventory.stock[k][2];
-                    }
-                }
-            }
 
             Sale.this.dispose();
 
@@ -193,7 +187,6 @@ public class Sale extends JFrame {
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         }
-    
 
         private class backButtonHandler implements ActionListener {
 
@@ -210,7 +203,7 @@ public class Sale extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                while (cart[i] != null){
+                while (cart[i] != null) {
                     //total += ;
                 }
                 Transaction.this.dispose();

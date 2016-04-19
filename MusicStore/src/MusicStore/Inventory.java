@@ -115,11 +115,11 @@ class Inventory extends JFrame {
     
     public boolean checkSale(int index, int amount){
         
-        return (Integer.parseInt(stock[index][1]) - amount) <= 0;
+        return (Integer.parseInt(stock[index][1]) - amount) >= 0;
     }
     
     public boolean checkOrder(int index, int amount){
-        return (Integer.parseInt(stock[index][1]) + amount) > 25;
+        return (Integer.parseInt(stock[index][1]) + amount) <= 25;
     }
 
     private class backButtonHandler implements ActionListener {
