@@ -55,7 +55,10 @@ class Inventory extends JFrame {
     public Inventory(String username, boolean showBack) {
         this.username = username;
         this.getContentPane().setBackground(new Color(0, 129, 172));
+<<<<<<< HEAD
+=======
         
+>>>>>>> zapple94/master
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
@@ -126,7 +129,11 @@ class Inventory extends JFrame {
     }
     
     public boolean checkOrder(int index, int amount){
+<<<<<<< HEAD
+        return (Integer.parseInt(stock[index][1]) + amount) <= 25;
+=======
         return (Integer.parseInt(stock[index][1]) + amount) >= 25;
+>>>>>>> zapple94/master
     }
 
     private class backButtonHandler implements ActionListener {
