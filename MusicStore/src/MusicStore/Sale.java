@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -12,15 +13,17 @@ import java.util.Scanner;
  */
 public class Sale extends JFrame {
 
+    private double total = 0;
+
     private final static int WIDTH = 500, HEIGHT = 250;
     private final JButton back, addTC, transact;
     private final backButtonHandler backBH;
     private final addButtonHandler addBH;
     private final transactButtonHandler transactBH;
-    private final String username;
-    private final String[] cart = new String[25];
+    private final String username, password;
+    private final Item[] cart = new Item[25];
     private final int[] amount = new int[25];
-    private int i = 0, quantity = 0;
+    private int numE = 0, quantity = 0;
 
     private final String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
@@ -32,12 +35,17 @@ public class Sale extends JFrame {
     private final JComboBox<String> instrumentList;
     private final String selectedInstrument;
 
-    public Sale(String username) {
+    public Sale(String username, String password) {
         for (int j = 0; j < amount.length; j++) {
             amount[j] = 0;
         }
 
+        for (int j = 0; j < cart.length; j++) {
+            cart[j] = new Item();
+        }
+
         this.username = username;
+        this.password = password;
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
@@ -92,7 +100,7 @@ public class Sale extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username, password);
         }
     }
 
@@ -102,12 +110,12 @@ public class Sale extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (instrumentList.getSelectedIndex() != -1) {
                 if (LogScreen.stockPrep.checkSale(instrumentList.getSelectedIndex() + 1, amount[instrumentList.getSelectedIndex()] + 1)) {
-                    amount[instrumentList.getSelectedIndex()] ++;
-                    cart[i] = (String) instrumentList.getSelectedItem();
+                    amount[instrumentList.getSelectedIndex()]++;
+                    cart[numE].name = (String) instrumentList.getSelectedItem();
+                    cart[numE].index = instrumentList.getSelectedIndex();
                     transact.setEnabled(true);
-                    i++;
-                }
-                else {
+                    numE++;
+                } else {
                     JOptionPane.showMessageDialog(null, "We have no more of this item in stock.");
                 }
             }
@@ -118,7 +126,7 @@ public class Sale extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Transaction transact = new Transaction(cart);
+            Transaction transact = new Transaction(cart, true);
         }
     }
 
@@ -129,20 +137,21 @@ public class Sale extends JFrame {
         private final backButtonHandler backBH;
         private final transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
-        private final JComboBox<String> checkOut;
-        private final String item;
+        private final JComboBox<Item> checkOut;
+        //private final String item;
 
-        public Transaction(String[] cart) {
+        public Transaction(Item[] cart, boolean confirm) {
 
             Sale.this.dispose();
 
-            JOptionPane.showMessageDialog(null, "Confirm with customer that cart contents"
-                    + " are correct.");
-
+            if (confirm) {
+                JOptionPane.showMessageDialog(null, "Confirm with customer that cart contents"
+                        + " are correct.");
+            }
             this.getContentPane().setBackground(new Color(0, 129, 172));
 
-            checkOut = new JComboBox(cart);
-            item = (String) checkOut.getSelectedItem();
+            checkOut = new JComboBox<>(cart);
+            // item = (String) checkOut.getSelectedItem();
             checkOut.setSelectedIndex(0);
             checkOut.addActionListener(removeBH);
 
@@ -193,7 +202,7 @@ public class Sale extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Transaction.this.dispose();
-                Sale sale = new Sale(username);
+                Sale sale = new Sale(username, password);
             }
 
         }
@@ -203,12 +212,18 @@ public class Sale extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                while (cart[i] != null) {
-                    //total += ;
-                }
                 Transaction.this.dispose();
-                JOptionPane.showMessageDialog(null, "Your total is: " + "$X");
-                MainMenu mainMenu = new MainMenu(username);
+                for (int i = 0; i < numE; i++) {
+                    total += Integer.parseInt(Inventory.stock[cart[i].index + 1][2]);
+                }
+                for (int i = 0; i < amount.length; i++) {
+                    if (amount[i] != 0) {
+                        LogScreen.stockPrep.invSub(i + 1, amount[i]);
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Your total is: " + "$" + total);
+                System.out.println(Arrays.toString(cart));
+                MainMenu mainMenu = new MainMenu(username, password);
             }
 
         }
@@ -217,9 +232,38 @@ public class Sale extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                checkOut.removeItem(checkOut.getSelectedItem());
+                int x = cart[checkOut.getSelectedIndex()].index;
+                cart[checkOut.getSelectedIndex()] = cart[numE - 1];
+                cart[numE - 1] = null;
+                //checkOut.removeItem(checkOut.getSelectedItem());
+                amount[x]--;
+                numE--;
+                Transaction.this.dispose();
+                Transaction refresh = new Transaction(cart, false);
+                System.out.println(Arrays.toString(cart));
             }
 
+        }
+
+    }
+
+    protected class Item {
+
+        protected String name;
+        protected int index;
+
+        protected Item() {
+
+        }
+
+        protected Item(String name, int index) {
+            this.name = name;
+            this.index = index;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
         }
 
     }

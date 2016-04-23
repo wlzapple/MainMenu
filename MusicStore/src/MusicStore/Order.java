@@ -16,7 +16,7 @@ public class Order extends JFrame {
     private addButtonHandler addBH;
     private final transactButtonHandler transactBH;
     private final Inventory inv;
-    private final String username;
+    private final String username, password;
     private final String[] cart = new String[25];
     private int i = 0;
 
@@ -30,9 +30,10 @@ public class Order extends JFrame {
     private final JComboBox<String> instrumentList;
     private final String selectedInstrument;
 
-    public Order(String username) {
+    public Order(String username, String password) {
         this.username = username;
-        inv = new Inventory(username, false);
+        this.password = password;
+        inv = new Inventory(username, password,  false);
         inv.setLocation(250, 200);
         this.setLocation(700, 300);
         this.getContentPane().setBackground(new Color(0, 129, 172));
@@ -89,7 +90,7 @@ public class Order extends JFrame {
         public void actionPerformed(ActionEvent e) {
             Order.this.dispose();
             inv.dispose();
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username,password);
         }
     }
 
@@ -186,7 +187,7 @@ public class Order extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Transaction.this.dispose();
-                Order order = new Order(username);
+                Order order = new Order(username,password);
             }
 
         }
@@ -197,7 +198,7 @@ public class Order extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Transaction.this.dispose();
                 JOptionPane.showMessageDialog(null, "Cost: " + "$X");
-                MainMenu mainMenu = new MainMenu(username);
+                MainMenu mainMenu = new MainMenu(username,password);
             }
 
         }
