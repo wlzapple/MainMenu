@@ -10,7 +10,7 @@ import java.awt.event.*;
  */
 class Trade extends JFrame {
 
-    private final String username;
+    private final String username, password;
     private final static int WIDTH = 350, HEIGHT = 200;
 
     private JLabel itemL, condL;
@@ -24,6 +24,7 @@ class Trade extends JFrame {
         "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"};
 
     private final String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
+    private final double[] percent = {1.00, .75, .50};
 
     private JComboBox<String> instrumentBox;
     private JComboBox<String> conds;
@@ -32,14 +33,15 @@ class Trade extends JFrame {
     private BoxValueChangeHandler select;
     private backButtonHandler backBH;
 
-    public Trade(String username) {
+    public Trade(String username,String password) {
         this.username = username;
+        this.password = password;
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
         int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt?", "Receipt", JOptionPane.YES_NO_OPTION);
         if (receiptYN != JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Inform the customer that we cannot accept an item without a receipt.", "", JOptionPane.PLAIN_MESSAGE);
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username, password);
         } else {
 
             select = new BoxValueChangeHandler();
@@ -115,7 +117,7 @@ class Trade extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             Trade.this.dispose();
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username, password);
         }
 
     }
@@ -126,9 +128,11 @@ class Trade extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String item = instrumentBox.getSelectedItem().toString();
             String cond = conds.getSelectedItem().toString();
+            LogScreen.stockPrep.invAdd(instrumentBox.getSelectedIndex()+1, 1);
             Trade.this.dispose();
-            JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $X credit", "", JOptionPane.PLAIN_MESSAGE);
-            Sale sale = new Sale(username);
+            double price = Integer.parseInt(Inventory.stock[instrumentBox.getSelectedIndex()+1][2]) * percent[conds.getSelectedIndex()];
+            JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price) +" credit", "", JOptionPane.PLAIN_MESSAGE);
+            Sale sale = new Sale(username, password);
 
         }
 

@@ -16,7 +16,7 @@ public class BuyBack extends JFrame {
     private backButtonHandler backBH;
     private BoxValueChangeHandler select;
     private transactButtonHandler transactBH;
-    private final String username;
+    private final String username, password;
 
     private final String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
@@ -32,14 +32,15 @@ public class BuyBack extends JFrame {
 
     private String selectedInstrument;
 
-    public BuyBack(String username) {
+    public BuyBack(String username, String password) {
         this.username = username;
+        this.password = password;
         this.getContentPane().setBackground(new Color(0, 129, 172));
         int rYN = JOptionPane.YES_NO_OPTION;
         int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt?", "Receipt", rYN);
         if (receiptYN != JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Inform the customer that we cannot accept an item without a receipt.", "", JOptionPane.PLAIN_MESSAGE);
-            MainMenu mainMenu = new MainMenu(this.username);
+            MainMenu mainMenu = new MainMenu(this.username, this.password);
         } else {
 
             select = new BoxValueChangeHandler();
@@ -102,7 +103,7 @@ public class BuyBack extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             BuyBack.this.dispose();
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username, password);
         }
 
     }
@@ -116,7 +117,7 @@ public class BuyBack extends JFrame {
             BuyBack.this.dispose();
             JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition,"
                     + " we will give $X", "", JOptionPane.PLAIN_MESSAGE);
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username, password);
         }
 
     }

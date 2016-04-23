@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 class ReturnItem extends JFrame {
 
-    private final String username;
+    private final String username, password;
 
     private final static int WIDTH = 350;
     private final static int HEIGHT = 200;
@@ -35,14 +35,15 @@ class ReturnItem extends JFrame {
     private BoxValueChangeHandler select;
     private backButtonHandler backBH;
 
-    public ReturnItem(String username) {
+    public ReturnItem(String username, String password) {
         this.username = username;
+        this.password = password;
         this.getContentPane().setBackground(new Color(0, 129, 172));
         //ask if they have a receipt
         int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt?", "Receipt", JOptionPane.YES_NO_OPTION);
         if (receiptYN != JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Inform the customer that we cannot accept an item without a receipt.", "", JOptionPane.PLAIN_MESSAGE);
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username, password);
         } else {
 
             select = new BoxValueChangeHandler();
@@ -118,7 +119,7 @@ class ReturnItem extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             ReturnItem.this.dispose();
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username,password);
         }
     }
 
@@ -132,7 +133,7 @@ class ReturnItem extends JFrame {
             ReturnItem.this.dispose();
             double price = Integer.parseInt(Inventory.stock[instrumentBox.getSelectedIndex()+1][2]) * percent[conds.getSelectedIndex()];
             JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price), "", JOptionPane.PLAIN_MESSAGE);
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username,password);
 
         }
 
