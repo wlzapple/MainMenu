@@ -3,9 +3,7 @@ package MusicStore;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.io.*;
 import java.util.Arrays;
-import java.util.Scanner;
 
 /**
  *
@@ -29,11 +27,9 @@ public class Sale extends JFrame {
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
         "Stands", "Amplifiers", "Guitar Picks", "Baritone Sax", "Timpani",
         "Cymbals", "CDs", "Violin", "Piano", "Ocarina", "Acoustic Guitar",
-        "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"
-    };
+        "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"};
 
     private final JComboBox<String> instrumentList;
-    private final String selectedInstrument;
 
     public Sale(String username, String password) {
         for (int j = 0; j < amount.length; j++) {
@@ -50,7 +46,6 @@ public class Sale extends JFrame {
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
         instrumentList = new JComboBox<>(instruments);
-        selectedInstrument = (String) instrumentList.getSelectedItem();
         instrumentList.setSelectedIndex(-1);
 
         back = new JButton("Back");
@@ -99,7 +94,7 @@ public class Sale extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setVisible(false);
+            Sale.this.dispose();
             MainMenu mainMenu = new MainMenu(username, password);
         }
     }
@@ -138,7 +133,6 @@ public class Sale extends JFrame {
         private final transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
         private final JComboBox<Item> checkOut;
-        //private final String item;
 
         public Transaction(Item[] cart, boolean confirm) {
 
@@ -151,7 +145,6 @@ public class Sale extends JFrame {
             this.getContentPane().setBackground(new Color(0, 129, 172));
 
             checkOut = new JComboBox<>(cart);
-            // item = (String) checkOut.getSelectedItem();
             checkOut.setSelectedIndex(0);
             checkOut.addActionListener(removeBH);
 
@@ -221,8 +214,7 @@ public class Sale extends JFrame {
                         LogScreen.stockPrep.invSub(i + 1, amount[i]);
                     }
                 }
-                JOptionPane.showMessageDialog(null, "Your total is: " + "$" + total);
-                System.out.println(Arrays.toString(cart));
+                JOptionPane.showMessageDialog(null, "Your total is: $" + Double.toString(total));
                 MainMenu mainMenu = new MainMenu(username, password);
             }
 
@@ -235,7 +227,6 @@ public class Sale extends JFrame {
                 int x = cart[checkOut.getSelectedIndex()].index;
                 cart[checkOut.getSelectedIndex()] = cart[numE - 1];
                 cart[numE - 1] = null;
-                //checkOut.removeItem(checkOut.getSelectedItem());
                 amount[x]--;
                 numE--;
                 Transaction.this.dispose();
