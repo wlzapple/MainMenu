@@ -114,8 +114,11 @@ public class Order extends JFrame {
                     cart[numE].index = instrumentList.getSelectedIndex();
                     transact.setEnabled(true);
                     numE++;
-                } else {
-                    JOptionPane.showMessageDialog(null, "We have no more room for this item.");
+                    if (numE == 25) {
+                        addTC.setEnabled(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "We have no more room for this item.");
+                    }
                 }
             }
         }
