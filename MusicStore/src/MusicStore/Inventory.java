@@ -60,7 +60,12 @@ class Inventory extends JFrame {
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
-        instrTable = new JTable(stock, colNames);
+        instrTable = new JTable(stock, colNames){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         instrTable.getColumn("Name").setPreferredWidth(120);
         instrTable.getColumn("Amount").setPreferredWidth(70);
         instrTable.getColumn("Price").setPreferredWidth(60);
