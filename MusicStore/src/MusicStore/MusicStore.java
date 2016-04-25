@@ -5,7 +5,7 @@ package MusicStore;
  * @author wlzapple, cabatts, ashalbert
  */
 public class MusicStore {
-    
+
     /**
      * @param args the command line arguments
      */

@@ -26,6 +26,7 @@ public class BuyBack extends JFrame {
     };
 
     private final String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
+    private final double[] percent = {.90, .65, .40};
 
     private JComboBox<String> options;
     private JComboBox<String> conds;
@@ -114,10 +115,18 @@ public class BuyBack extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String item = options.getSelectedItem().toString();
             String cond = conds.getSelectedItem().toString();
+            LogScreen.stockPrep.invAdd(options.getSelectedIndex() + 1, 1);
             BuyBack.this.dispose();
-            JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition,"
-                    + " we will give $X", "", JOptionPane.PLAIN_MESSAGE);
-            MainMenu mainMenu = new MainMenu(username, password);
+            if (conds.getSelectedIndex() == 3) {
+                JOptionPane.showMessageDialog(null, "Inform the customer that we can not accept"
+                        + " an instrument in broken condition.");
+                MainMenu mainmenu = new MainMenu(username, password);
+            } else {
+                double price = Integer.parseInt(Inventory.stock[options.getSelectedIndex() + 1][2]) + percent[conds.getSelectedIndex()];
+                JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition,"
+                        + " we will give you $" + Double.toString(price), "", JOptionPane.PLAIN_MESSAGE);
+                MainMenu mainMenu = new MainMenu(username, password);
+            }
         }
 
     }

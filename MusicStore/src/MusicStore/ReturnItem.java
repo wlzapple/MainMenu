@@ -119,7 +119,7 @@ class ReturnItem extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             ReturnItem.this.dispose();
-            MainMenu mainMenu = new MainMenu(username,password);
+            MainMenu mainMenu = new MainMenu(username, password);
         }
     }
 
@@ -129,11 +129,17 @@ class ReturnItem extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String item = instrumentBox.getSelectedItem().toString();
             String cond = conds.getSelectedItem().toString();
-            LogScreen.stockPrep.invAdd(instrumentBox.getSelectedIndex()+1, 1);
+            LogScreen.stockPrep.invAdd(instrumentBox.getSelectedIndex() + 1, 1);
             ReturnItem.this.dispose();
-            double price = Integer.parseInt(Inventory.stock[instrumentBox.getSelectedIndex()+1][2]) * percent[conds.getSelectedIndex()];
-            JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price), "", JOptionPane.PLAIN_MESSAGE);
-            MainMenu mainMenu = new MainMenu(username,password);
+            if (conds.getSelectedIndex() == 3) {
+                JOptionPane.showMessageDialog(null, "Inform the customer that we can not accept an instrument"
+                        + " in broken condition.");
+                MainMenu mainMenu = new MainMenu(username, password);
+            } else {
+                double price = Integer.parseInt(Inventory.stock[instrumentBox.getSelectedIndex() + 1][2]) * percent[conds.getSelectedIndex()];
+                JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price), "", JOptionPane.PLAIN_MESSAGE);
+                MainMenu mainMenu = new MainMenu(username, password);
+            }
 
         }
 
