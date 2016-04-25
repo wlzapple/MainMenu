@@ -12,7 +12,7 @@ import javax.swing.*;
  */
 class Inventory extends JFrame {
 
-    private String username;
+    private String username, password;
 
     private final static int WIDTH = 425;
     private final static int HEIGHT = 500;
@@ -52,13 +52,11 @@ class Inventory extends JFrame {
         
     }
 
-    public Inventory(String username, boolean showBack) {
+    public Inventory(String username, String password, boolean showBack) {
         this.username = username;
+        this.password = password;
         this.getContentPane().setBackground(new Color(0, 129, 172));
-<<<<<<< HEAD
-=======
-        
->>>>>>> zapple94/master
+
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
@@ -129,11 +127,7 @@ class Inventory extends JFrame {
     }
     
     public boolean checkOrder(int index, int amount){
-<<<<<<< HEAD
         return (Integer.parseInt(stock[index][1]) + amount) <= 25;
-=======
-        return (Integer.parseInt(stock[index][1]) + amount) >= 25;
->>>>>>> zapple94/master
     }
 
     private class backButtonHandler implements ActionListener {
@@ -141,7 +135,7 @@ class Inventory extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             Inventory.this.dispose();
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username, password);
         }
 
     }

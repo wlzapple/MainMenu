@@ -82,9 +82,9 @@ public class LogScreen extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setVisible(false);
+            LogScreen.this.dispose();
             stockPrep = new Inventory();
-            MainMenu start = new MainMenu(username.getText());
+            MainMenu start = new MainMenu(username.getText(), password.getText());
         }
     }
 

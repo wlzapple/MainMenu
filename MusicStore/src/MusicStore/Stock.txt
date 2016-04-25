@@ -1,6 +1,6 @@
-Drum Set:7:750
-Alto Sax:8:1100
-Tenor Sax:4:1350
+Drum Set:5:750
+Alto Sax:7:1100
+Tenor Sax:3:1350
 Trumpet:7:500
 Electric Guitar:5:900
 Euphonium:6:1800
