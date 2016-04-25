@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 class ReturnItem extends JFrame {
 
-    private final String username;
+    private final String username, password;
 
     private final static int WIDTH = 350;
     private final static int HEIGHT = 200;
@@ -26,6 +26,7 @@ class ReturnItem extends JFrame {
         "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"};
 
     private final String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
+    private final double[] percent = {1.00, .75, .50};
 
     private JComboBox<String> instrumentBox;
     private JComboBox<String> conds;
@@ -34,14 +35,15 @@ class ReturnItem extends JFrame {
     private BoxValueChangeHandler select;
     private backButtonHandler backBH;
 
-    public ReturnItem(String username) {
+    public ReturnItem(String username, String password) {
         this.username = username;
+        this.password = password;
         this.getContentPane().setBackground(new Color(0, 129, 172));
         //ask if they have a receipt
         int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt?", "Receipt", JOptionPane.YES_NO_OPTION);
         if (receiptYN != JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Inform the customer that we cannot accept an item without a receipt.", "", JOptionPane.PLAIN_MESSAGE);
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username, password);
         } else {
 
             select = new BoxValueChangeHandler();
@@ -117,7 +119,7 @@ class ReturnItem extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             ReturnItem.this.dispose();
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username, password);
         }
     }
 
@@ -127,9 +129,17 @@ class ReturnItem extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String item = instrumentBox.getSelectedItem().toString();
             String cond = conds.getSelectedItem().toString();
+            LogScreen.stockPrep.invAdd(instrumentBox.getSelectedIndex() + 1, 1);
             ReturnItem.this.dispose();
-            JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $X", "", JOptionPane.PLAIN_MESSAGE);
-            MainMenu mainMenu = new MainMenu(username);
+            if (conds.getSelectedIndex() == 3) {
+                JOptionPane.showMessageDialog(null, "Inform the customer that we can not accept an instrument"
+                        + " in broken condition.");
+                MainMenu mainMenu = new MainMenu(username, password);
+            } else {
+                double price = Integer.parseInt(Inventory.stock[instrumentBox.getSelectedIndex() + 1][2]) * percent[conds.getSelectedIndex()];
+                JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price), "", JOptionPane.PLAIN_MESSAGE);
+                MainMenu mainMenu = new MainMenu(username, password);
+            }
 
         }
 

@@ -3,6 +3,7 @@ package MusicStore;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.Arrays;
 
 /**
  *
@@ -10,44 +11,53 @@ import javax.swing.*;
  */
 public class Order extends JFrame {
 
+    private double total = 0;
+
     private final static int WIDTH = 500, HEIGHT = 250;
     private final JButton back, addTC, transact;
     private final backButtonHandler backBH;
     private addButtonHandler addBH;
     private final transactButtonHandler transactBH;
     private final Inventory inv;
-    private final String username;
-    private final String[] cart = new String[25];
-    private int i = 0;
+    private final String username, password;
+    private final Item[] cart = new Item[25];
+    private final int[] amount = new int[25];
+    private int numE = 0, quantity = 0;
 
     private final String[] instruments = {"Drum Set", "Alto Sax", "Tenor Sax", "Trumpet",
         "Electric Guitar", "Euphonium", "Flute", "Drum Sticks", "Music Books",
         "Stands", "Amplifiers", "Guitar Picks", "Baritone Sax", "Timpani",
         "Cymbals", "CDs", "Violin", "Piano", "Ocarina", "Acoustic Guitar",
-        "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"
-    };
+        "Trombone", "Sousaphone", "Marimba", "Clarinet", "Triangle"};
 
     private final JComboBox<String> instrumentList;
-    private final String selectedInstrument;
 
-    public Order(String username) {
+    public Order(String username, String password) {
+
+        for (int j = 0; j < amount.length; j++) {
+            amount[j] = 0;
+        }
+
+        for (int j = 0; j < cart.length; j++) {
+            cart[j] = new Item();
+        }
+
         this.username = username;
-        inv = new Inventory(username, false);
+        this.password = password;
+        inv = new Inventory(username, password, false);
         inv.setLocation(250, 200);
         this.setLocation(700, 300);
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
         instrumentList = new JComboBox<>(instruments);
-        selectedInstrument = (String) instrumentList.getSelectedItem();
         instrumentList.setSelectedIndex(-1);
-        instrumentList.addActionListener(addBH);
 
         back = new JButton("Back");
         back.setSize(20, 20);
         backBH = new Order.backButtonHandler();
         back.addActionListener(backBH);
 
-        addTC = new JButton("Add to Cart");
+        addTC = new JButton("Add to Order");
         addTC.setSize(20, 20);
         addBH = new Order.addButtonHandler();
         addTC.addActionListener(addBH);
@@ -89,7 +99,7 @@ public class Order extends JFrame {
         public void actionPerformed(ActionEvent e) {
             Order.this.dispose();
             inv.dispose();
-            MainMenu mainMenu = new MainMenu(username);
+            MainMenu mainMenu = new MainMenu(username, password);
         }
     }
 
@@ -98,11 +108,16 @@ public class Order extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (instrumentList.getSelectedIndex() != -1) {
-                cart[i] = (String) instrumentList.getSelectedItem();
-                transact.setEnabled(true);
-                i++;
+                if (LogScreen.stockPrep.checkOrder(instrumentList.getSelectedIndex() + 1, amount[instrumentList.getSelectedIndex()] + 1)) {
+                    amount[instrumentList.getSelectedIndex()]++;
+                    cart[numE].name = (String) instrumentList.getSelectedItem();
+                    cart[numE].index = instrumentList.getSelectedIndex();
+                    transact.setEnabled(true);
+                    numE++;
+                } else {
+                    JOptionPane.showMessageDialog(null, "We have no more room for this item.");
+                }
             }
-
         }
     }
 
@@ -110,7 +125,7 @@ public class Order extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Transaction transact = new Transaction(cart);
+            Transaction transact = new Transaction(cart, true);
             inv.dispose();
         }
     }
@@ -122,20 +137,19 @@ public class Order extends JFrame {
         private final backButtonHandler backBH;
         private final transactButtonHandler transactBH;
         private removeButtonHandler removeBH;
-        private final JComboBox<String> checkOut;
-        private final String item;
+        private final JComboBox<Item> checkOut;
 
-        public Transaction(String[] cart) {
-            
+        public Transaction(Item[] cart, boolean confirm) {
+
             Order.this.dispose();
 
-            JOptionPane.showMessageDialog(null, "Confirm with supplier that cart contents"
-                    + " are correct.");
-
+            if (confirm) {
+                JOptionPane.showMessageDialog(null, "Confirm with supplier that cart contents"
+                        + " are correct.");
+            }
             this.getContentPane().setBackground(new Color(0, 129, 172));
 
-            checkOut = new JComboBox(cart);
-            item = (String) checkOut.getSelectedItem();
+            checkOut = new JComboBox<>(cart);
             checkOut.setSelectedIndex(0);
             checkOut.addActionListener(removeBH);
 
@@ -154,7 +168,7 @@ public class Order extends JFrame {
             removeBH = new Transaction.removeButtonHandler();
             remove.addActionListener(removeBH);
 
-            this.setTitle("Transact");
+            this.setTitle("Finish Order");
 
             SpringLayout layout = new SpringLayout();
             Container pane = getContentPane();
@@ -186,7 +200,7 @@ public class Order extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Transaction.this.dispose();
-                Order order = new Order(username);
+                Order order = new Order(username, password);
             }
 
         }
@@ -196,8 +210,16 @@ public class Order extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Transaction.this.dispose();
-                JOptionPane.showMessageDialog(null, "Cost: " + "$X");
-                MainMenu mainMenu = new MainMenu(username);
+                for (int i = 0; i < numE; i++) {
+                    total += (Integer.parseInt(Inventory.stock[cart[i].index + 1][2]) * .9);
+                }
+                for (int i = 0; i < amount.length; i++) {
+                    if (amount[i] != 0) {
+                        LogScreen.stockPrep.invAdd(i + 1, amount[i]);
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Cost: $" + Double.toString(total));
+                MainMenu mainMenu = new MainMenu(username, password);
             }
 
         }
@@ -206,15 +228,45 @@ public class Order extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                checkOut.removeItem(checkOut.getSelectedItem());
+                int x = cart[checkOut.getSelectedIndex()].index;
+                cart[checkOut.getSelectedIndex()] = cart[numE - 1];
+                cart[numE - 1] = null;
+                amount[x]--;
+                numE--;
+                Transaction.this.dispose();
+                if (numE == 0) {
+                    JOptionPane.showMessageDialog(null, "Your cart is empty. Please add an item"
+                            + " to cart to continue transaction.");
+                    Sale sale = new Sale(username, password);
+                } else {
+                    Transaction refresh = new Transaction(cart, false);
+                    System.out.println(Arrays.toString(cart));
+                }
             }
 
         }
 
     }
 
-<<<<<<< HEAD
+    protected class Item {
+
+        protected String name;
+        protected int index;
+
+        protected Item() {
+
+        }
+
+        protected Item(String name, int index) {
+            this.name = name;
+            this.index = index;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
 }
-=======
-}
->>>>>>> zapple94/master

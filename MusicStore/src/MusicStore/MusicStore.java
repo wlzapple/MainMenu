@@ -5,7 +5,7 @@ package MusicStore;
  * @author wlzapple, cabatts, ashalbert
  */
 public class MusicStore {
-    
+
     /**
      * @param args the command line arguments
      */
@@ -13,8 +13,4 @@ public class MusicStore {
         LogScreen login = new LogScreen();
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> zapple94/master

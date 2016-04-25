@@ -10,6 +10,8 @@ import javax.swing.*;
  */
 public class LogScreen extends JFrame {
 
+    public static Inventory stockPrep;
+
     private final static int WIDTH = 350;
     private final static int HEIGHT = 200;
 
@@ -42,7 +44,7 @@ public class LogScreen extends JFrame {
 
         this.setTitle("The Sound of Music");
         this.getContentPane().setBackground(new Color(0, 129, 172));
-        
+
         SpringLayout layout = new SpringLayout();
         Container pane = getContentPane();
         pane.setLayout(layout);
@@ -55,7 +57,7 @@ public class LogScreen extends JFrame {
         pane.add(exit);
 
         this.getRootPane().setDefaultButton(login);
-        
+
         layout.putConstraint(SpringLayout.WEST, usernameLBL, 75, SpringLayout.WEST, pane);
         layout.putConstraint(SpringLayout.NORTH, usernameLBL, 20, SpringLayout.NORTH, pane);
         layout.putConstraint(SpringLayout.WEST, passwordLBL, 75, SpringLayout.WEST, pane);
@@ -80,8 +82,9 @@ public class LogScreen extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setVisible(false);
-            MainMenu start = new MainMenu(username.getText());
+            LogScreen.this.dispose();
+            stockPrep = new Inventory();
+            MainMenu start = new MainMenu(username.getText(), password.getText());
         }
     }
 
@@ -93,8 +96,4 @@ public class LogScreen extends JFrame {
         }
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> zapple94/master

@@ -30,10 +30,11 @@ public class MainMenu extends JFrame {
     private final BuyBackButtonHandler bbHandler;
     private final ViewInvButtonHandler viHandler;
     private final LogOffButtonHandler logoffHandler;
-    private String username;
+    private String username, password;
 
-    public MainMenu(String username) {
+    public MainMenu(String username, String password) {
         this.username = username;
+        this.password = password;
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
@@ -42,7 +43,6 @@ public class MainMenu extends JFrame {
         }
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
-
 
         //assign handlers to buttons, add ActionListeners
         saleB = new JButton("Sales");
@@ -110,7 +110,7 @@ public class MainMenu extends JFrame {
         layout.putConstraint(SpringLayout.EAST, logoffB, -25, SpringLayout.EAST, pane);
         layout.putConstraint(SpringLayout.SOUTH, logoffB, -25, SpringLayout.SOUTH, pane);
 
-        if (!"manager".equalsIgnoreCase(username)) {
+        if (!"manager".equalsIgnoreCase(username) || !"manager".equalsIgnoreCase(password)) {
             tradeB.setEnabled(false);
             buyBackB.setEnabled(false);
             ordB.setEnabled(false);
@@ -128,7 +128,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Sale sale = new Sale(username);
+            Sale sale = new Sale(username, password);
         }
 
     }
@@ -138,7 +138,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            ReturnItem ret = new ReturnItem(username);
+            ReturnItem ret = new ReturnItem(username, password);
         }
 
     }
@@ -148,7 +148,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Order order = new Order(username);
+            Order order = new Order(username, password);
         }
 
     }
@@ -158,7 +158,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Trade trade = new Trade(username);
+            Trade trade = new Trade(username, password);
         }
     }
 
@@ -167,7 +167,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            BuyBack buyback = new BuyBack(username);
+            BuyBack buyback = new BuyBack(username, password);
         }
 
     }
@@ -177,7 +177,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Inventory inv = new Inventory(username, true);
+            Inventory inv = new Inventory(username, password, true);
         }
 
     }
@@ -186,6 +186,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            LogScreen.stockPrep.writeStock();
             MainMenu.this.dispose();
             LogScreen restart = new LogScreen();
         }
