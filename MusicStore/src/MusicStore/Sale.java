@@ -233,8 +233,15 @@ public class Sale extends JFrame {
                 amount[x]--;
                 numE--;
                 Transaction.this.dispose();
+                if (numE == 0) {
+                    JOptionPane.showMessageDialog(null, "Your cart is empty. Please add an item"
+                            + " to cart to continue transaction.");
+                    Sale sale = new Sale(username, password);
+                }
+                else {
                 Transaction refresh = new Transaction(cart, false);
                 System.out.println(Arrays.toString(cart));
+                }
             }
 
         }
