@@ -26,7 +26,7 @@ public class BuyBack extends JFrame {
     };
 
     private final String[] conditions = {"Perfect", "Good", "Acceptable", "Broken"};
-    private final double[] percent = {1.00, .75, .50};
+    private final double[] percent = {.90, .65, .40};
 
     private JComboBox<String> options;
     private JComboBox<String> conds;
