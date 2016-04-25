@@ -234,10 +234,9 @@ public class Sale extends JFrame {
                     JOptionPane.showMessageDialog(null, "Your cart is empty. Please add an item"
                             + " to cart to continue transaction.");
                     Sale sale = new Sale(username, password);
-                }
-                else {
-                Transaction refresh = new Transaction(cart, false);
-                System.out.println(Arrays.toString(cart));
+                } else {
+                    Transaction refresh = new Transaction(cart, false);
+                    System.out.println(Arrays.toString(cart));
                 }
             }
 

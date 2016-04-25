@@ -13,7 +13,7 @@ import javax.swing.*;
  * @authors wlzapple, cabatts, ashalbert
  */
 public class MainMenu extends JFrame {
-    
+
     private static final int WIDTH = 500, HEIGHT = 250;
 
     /**
@@ -43,7 +43,6 @@ public class MainMenu extends JFrame {
         }
 
         this.getContentPane().setBackground(new Color(0, 129, 172));
-
 
         //assign handlers to buttons, add ActionListeners
         saleB = new JButton("Sales");
@@ -129,7 +128,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Sale sale = new Sale(username,password);
+            Sale sale = new Sale(username, password);
         }
 
     }
@@ -139,7 +138,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            ReturnItem ret = new ReturnItem(username,password);
+            ReturnItem ret = new ReturnItem(username, password);
         }
 
     }
@@ -149,7 +148,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Order order = new Order(username,password);
+            Order order = new Order(username, password);
         }
 
     }
@@ -159,7 +158,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Trade trade = new Trade(username,password);
+            Trade trade = new Trade(username, password);
         }
     }
 
@@ -168,7 +167,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            BuyBack buyback = new BuyBack(username,password);
+            BuyBack buyback = new BuyBack(username, password);
         }
 
     }
@@ -178,7 +177,7 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MainMenu.this.dispose();
-            Inventory inv = new Inventory(username,password, true);
+            Inventory inv = new Inventory(username, password, true);
         }
 
     }
