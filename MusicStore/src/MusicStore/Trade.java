@@ -33,7 +33,7 @@ class Trade extends JFrame {
     private BoxValueChangeHandler select;
     private backButtonHandler backBH;
 
-    public Trade(String username,String password) {
+    public Trade(String username, String password) {
         this.username = username;
         this.password = password;
 
@@ -128,11 +128,17 @@ class Trade extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String item = instrumentBox.getSelectedItem().toString();
             String cond = conds.getSelectedItem().toString();
-            LogScreen.stockPrep.invAdd(instrumentBox.getSelectedIndex()+1, 1);
+            LogScreen.stockPrep.invAdd(instrumentBox.getSelectedIndex() + 1, 1);
             Trade.this.dispose();
-            double price = Integer.parseInt(Inventory.stock[instrumentBox.getSelectedIndex()+1][2]) * percent[conds.getSelectedIndex()];
-            JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price) +" credit", "", JOptionPane.PLAIN_MESSAGE);
-            Sale sale = new Sale(username, password);
+            if (conds.getSelectedIndex() == 3) {
+                JOptionPane.showMessageDialog(null, "Inform the customer that we can not accept an instrument"
+                        + " in broken condition.");
+                MainMenu mainMenu = new MainMenu(username, password);
+            } else {
+                double price = Integer.parseInt(Inventory.stock[instrumentBox.getSelectedIndex() + 1][2]) * percent[conds.getSelectedIndex()];
+                JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price) + " credit", "", JOptionPane.PLAIN_MESSAGE);
+                Sale sale = new Sale(username, password);
+            }
 
         }
 

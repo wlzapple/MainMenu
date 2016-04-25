@@ -25,14 +25,14 @@ class Inventory extends JFrame {
 
     public static String[][] stock = new String[26][3];
     private String[] colNames = new String[]{"Name", "Amount", "Price"};
-    
-    public Inventory(){
+
+    public Inventory() {
         File file = new File("src/MusicStore/Stock.txt");
         stock[0][0] = "Name";
         stock[0][1] = "Quantity";
         stock[0][2] = "Price ($)";
-        
-       try {
+
+        try {
             Scanner scan = new Scanner(file);
             scan.useDelimiter(":");
             int i = 1;
@@ -48,8 +48,7 @@ class Inventory extends JFrame {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
-        
-        
+
     }
 
     public Inventory(String username, String password, boolean showBack) {
@@ -57,12 +56,11 @@ class Inventory extends JFrame {
         this.password = password;
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
-
         this.getContentPane().setBackground(new Color(0, 129, 172));
 
-        instrTable = new JTable(stock, colNames){
+        instrTable = new JTable(stock, colNames) {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
@@ -97,41 +95,41 @@ class Inventory extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
-    
-    public void writeStock(){
+
+    public void writeStock() {
         File file = new File("src/MusicStore/Stock.txt");
         try {
             FileOutputStream out = new FileOutputStream(file);
             OutputStreamWriter osw = new OutputStreamWriter(out);
             Writer w = new BufferedWriter(osw);
             for (int i = 1; i < 26; i++) {
-                w.write(stock[i][0]+":"+stock[i][1]+":"+stock[i][2]+"\n");
+                w.write(stock[i][0] + ":" + stock[i][1] + ":" + stock[i][2] + "\n");
             }
             w.close();
-            
+
         } catch (IOException e) {
             System.err.println("Issue writing to file Stock.txt");
         }
     }
-    
+
     public void invAdd(int index, int amount) {
-       int x =  Integer.parseInt(stock[index][1]);
-       x += amount;
-       stock[index][1] = Integer.toString(x);
+        int x = Integer.parseInt(stock[index][1]);
+        x += amount;
+        stock[index][1] = Integer.toString(x);
     }
-    
-    public void invSub(int index, int amount){
-       int x =  Integer.parseInt(stock[index][1]);
-       x -= amount;
-       stock[index][1] = Integer.toString(x);
+
+    public void invSub(int index, int amount) {
+        int x = Integer.parseInt(stock[index][1]);
+        x -= amount;
+        stock[index][1] = Integer.toString(x);
     }
-    
-    public boolean checkSale(int index, int amount){
-        
+
+    public boolean checkSale(int index, int amount) {
+
         return (Integer.parseInt(stock[index][1]) - amount) >= 0;
     }
-    
-    public boolean checkOrder(int index, int amount){
+
+    public boolean checkOrder(int index, int amount) {
         return (Integer.parseInt(stock[index][1]) + amount) <= 25;
     }
 
