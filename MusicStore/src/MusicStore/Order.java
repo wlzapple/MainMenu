@@ -33,7 +33,7 @@ public class Order extends JFrame {
     private final JComboBox<String> instrumentList;
 
     public Order(String username, String password) {
-        
+
         for (int j = 0; j < amount.length; j++) {
             amount[j] = 0;
         }
@@ -41,7 +41,7 @@ public class Order extends JFrame {
         for (int j = 0; j < cart.length; j++) {
             cart[j] = new Item();
         }
-        
+
         this.username = username;
         this.password = password;
         inv = new Inventory(username, password, false);
@@ -108,13 +108,13 @@ public class Order extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (instrumentList.getSelectedIndex() != -1) {
-                if (LogScreen.stockPrep.checkOrder(instrumentList.getSelectedIndex() +1, amount[instrumentList.getSelectedIndex()]+1)) {
+                if (LogScreen.stockPrep.checkOrder(instrumentList.getSelectedIndex() + 1, amount[instrumentList.getSelectedIndex()] + 1)) {
                     amount[instrumentList.getSelectedIndex()]++;
                     cart[numE].name = (String) instrumentList.getSelectedItem();
                     cart[numE].index = instrumentList.getSelectedIndex();
                     transact.setEnabled(true);
                     numE++;
-                } else{
+                } else {
                     JOptionPane.showMessageDialog(null, "We have no more room for this item.");
                 }
             }
@@ -142,10 +142,10 @@ public class Order extends JFrame {
         public Transaction(Item[] cart, boolean confirm) {
 
             Order.this.dispose();
-            
-            if(confirm){
-            JOptionPane.showMessageDialog(null, "Confirm with supplier that cart contents"
-                    + " are correct.");
+
+            if (confirm) {
+                JOptionPane.showMessageDialog(null, "Confirm with supplier that cart contents"
+                        + " are correct.");
             }
             this.getContentPane().setBackground(new Color(0, 129, 172));
 
@@ -211,11 +211,11 @@ public class Order extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Transaction.this.dispose();
                 for (int i = 0; i < numE; i++) {
-                    total += (Integer.parseInt(Inventory.stock[cart[i].index+1][2])*.9);
+                    total += (Integer.parseInt(Inventory.stock[cart[i].index + 1][2]) * .9);
                 }
                 for (int i = 0; i < amount.length; i++) {
-                    if (amount[i]!=0) {
-                        LogScreen.stockPrep.invAdd(i+1, amount[i]);
+                    if (amount[i] != 0) {
+                        LogScreen.stockPrep.invAdd(i + 1, amount[i]);
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Cost: $" + Double.toString(total));
@@ -234,15 +234,21 @@ public class Order extends JFrame {
                 amount[x]--;
                 numE--;
                 Transaction.this.dispose();
-                Transaction refresh = new Transaction(cart, false);
-                System.out.println(Arrays.toString(cart));
+                if (numE == 0) {
+                    JOptionPane.showMessageDialog(null, "Your cart is empty. Please add an item"
+                            + " to cart to continue transaction.");
+                    Sale sale = new Sale(username, password);
+                } else {
+                    Transaction refresh = new Transaction(cart, false);
+                    System.out.println(Arrays.toString(cart));
+                }
             }
 
         }
 
     }
 
-   protected class Item {
+    protected class Item {
 
         protected String name;
         protected int index;
@@ -261,6 +267,6 @@ public class Order extends JFrame {
             return this.name;
         }
 
-    } 
-    
+    }
+
 }
