@@ -122,9 +122,9 @@ public class BuyBack extends JFrame {
                         + " an instrument in broken condition.");
                 MainMenu mainmenu = new MainMenu(username, password);
             } else {
-                double price = Integer.parseInt(Inventory.stock[options.getSelectedIndex() + 1][2]) + percent[conds.getSelectedIndex()];
+                double price = Integer.parseInt(Inventory.stock[options.getSelectedIndex() + 1][2]) * percent[conds.getSelectedIndex()];
                 JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition,"
-                        + " we will give you $" + Double.toString(price), "", JOptionPane.PLAIN_MESSAGE);
+                        + " we will give you $" + Double.toString(price) + "0", "", JOptionPane.PLAIN_MESSAGE);
                 MainMenu mainMenu = new MainMenu(username, password);
             }
         }

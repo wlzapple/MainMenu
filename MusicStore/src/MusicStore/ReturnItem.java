@@ -137,7 +137,7 @@ class ReturnItem extends JFrame {
                 MainMenu mainMenu = new MainMenu(username, password);
             } else {
                 double price = Integer.parseInt(Inventory.stock[instrumentBox.getSelectedIndex() + 1][2]) * percent[conds.getSelectedIndex()];
-                JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price), "", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price) + "0", "", JOptionPane.PLAIN_MESSAGE);
                 MainMenu mainMenu = new MainMenu(username, password);
             }
 
