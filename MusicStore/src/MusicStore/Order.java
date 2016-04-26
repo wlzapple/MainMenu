@@ -2,8 +2,10 @@ package MusicStore;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import javax.swing.*;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  *
@@ -222,7 +224,8 @@ public class Order extends JFrame {
                         LogScreen.stockPrep.invAdd(i + 1, amount[i]);
                     }
                 }
-                JOptionPane.showMessageDialog(null, "Cost: $" + Double.toString(total)+"0");
+                writeOrder(total);
+                JOptionPane.showMessageDialog(null, "Cost: $" + Double.toString(total) + "0");
                 MainMenu mainMenu = new MainMenu(username, password);
             }
 
@@ -241,13 +244,53 @@ public class Order extends JFrame {
                 if (numE == 0) {
                     JOptionPane.showMessageDialog(null, "Your cart is empty. Please add an item"
                             + " to cart to continue transaction.");
-                    Sale sale = new Sale(username, password);
+                    Order order = new Order(username, password);
                 } else {
                     Transaction refresh = new Transaction(cart, false);
                     System.out.println(Arrays.toString(cart));
                 }
             }
 
+        }
+
+        private void writeOrder(double total) {
+            int recNum = 0;
+            File record = new File("src/MusicStore/Records.txt");
+            //read the order number from line 1
+            try {
+                Scanner scan = new Scanner(record);
+                recNum = Integer.parseInt(scan.nextLine());
+                scan.close();
+            } catch (FileNotFoundException | NumberFormatException e) {
+                System.err.println("Error reading file Records.txt");
+            }
+            //write out the order at the end
+            try {
+                FileOutputStream out = new FileOutputStream(record, true);
+                OutputStreamWriter osw = new OutputStreamWriter(out);
+                Writer w = new BufferedWriter(osw);
+                w.write("\nOrder #: " + recNum + "\nCost: $" + Double.toString(total) + "0\n");
+                for (int i = 0; i < amount.length; i++) {
+                    if (amount[i] != 0) {
+                        w.write(Inventory.stock[i + 1][0] + ": " + amount[i] + "\n");
+                    }
+                }
+                w.close();
+                recNum++;
+            } catch (Exception e) {
+                System.err.println("Issue writing to Records.txt");
+            }
+            //update the order number on line 1
+            try {
+                RandomAccessFile f = new RandomAccessFile(record,"rw");
+                f.seek(0);
+                f.write(Integer.toString(recNum).getBytes());
+                f.close();
+                
+            } catch (Exception e) {
+                System.err.println("Issue writing to Records.txt");
+            }
+            System.out.println(recNum);
         }
 
     }
