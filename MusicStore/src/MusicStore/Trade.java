@@ -128,13 +128,17 @@ class Trade extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String item = instrumentBox.getSelectedItem().toString();
             String cond = conds.getSelectedItem().toString();
-            LogScreen.stockPrep.invAdd(instrumentBox.getSelectedIndex() + 1, 1);
+            
             Trade.this.dispose();
-            if (conds.getSelectedIndex() == 3) {
+            if (!LogScreen.stockPrep.checkOrder(instrumentBox.getSelectedIndex() + 1, 1)) {
+                JOptionPane.showMessageDialog(null, "Inform the customer that we cannot accept the instrument at this time.");
+                MainMenu mainMenu = new MainMenu(username, password);
+            } else if (conds.getSelectedIndex() == 3) {
                 JOptionPane.showMessageDialog(null, "Inform the customer that we can not accept an instrument"
                         + " in broken condition.");
                 MainMenu mainMenu = new MainMenu(username, password);
             } else {
+                LogScreen.stockPrep.invAdd(instrumentBox.getSelectedIndex() + 1, 1);
                 double price = Integer.parseInt(Inventory.stock[instrumentBox.getSelectedIndex() + 1][2]) * percent[conds.getSelectedIndex()];
                 JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition, we will give $" + Double.toString(price) + "0 credit", "", JOptionPane.PLAIN_MESSAGE);
                 Sale sale = new Sale(username, password);

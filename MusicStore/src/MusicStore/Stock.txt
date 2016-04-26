@@ -1,5 +1,5 @@
-Drum Set:15:750
-Alto Sax:15:1100
+Drum Set:25:750
+Alto Sax:16:1100
 Tenor Sax:3:1350
 Trumpet:7:500
 Electric Guitar:9:900

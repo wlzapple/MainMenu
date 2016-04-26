@@ -115,13 +115,18 @@ public class BuyBack extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String item = options.getSelectedItem().toString();
             String cond = conds.getSelectedItem().toString();
-            LogScreen.stockPrep.invAdd(options.getSelectedIndex() + 1, 1);
+            
             BuyBack.this.dispose();
-            if (conds.getSelectedIndex() == 3) {
+            if (!LogScreen.stockPrep.checkOrder(options.getSelectedIndex() + 1, 1)) {
+                JOptionPane.showMessageDialog(null, "Inform the customer that we cannot accept the instrument at this time.");
+                MainMenu mainMenu = new MainMenu(username, password);
+            }
+            else if (conds.getSelectedIndex() == 3) {
                 JOptionPane.showMessageDialog(null, "Inform the customer that we can not accept"
                         + " an instrument in broken condition.");
                 MainMenu mainmenu = new MainMenu(username, password);
             } else {
+                LogScreen.stockPrep.invAdd(options.getSelectedIndex() + 1, 1);
                 double price = Integer.parseInt(Inventory.stock[options.getSelectedIndex() + 1][2]) * percent[conds.getSelectedIndex()];
                 JOptionPane.showMessageDialog(null, "For a " + item + " in " + cond + " condition,"
                         + " we will give you $" + Double.toString(price) + "0", "", JOptionPane.PLAIN_MESSAGE);
