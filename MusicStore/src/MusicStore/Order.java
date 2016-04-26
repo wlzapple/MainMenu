@@ -116,10 +116,11 @@ public class Order extends JFrame {
                     numE++;
                     if (numE == 25) {
                         addTC.setEnabled(false);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "We have no more room for this item.");
                     }
+                } else {
+                    JOptionPane.showMessageDialog(null, "We have no more room for this item.");
                 }
+
             }
         }
     }
@@ -221,7 +222,7 @@ public class Order extends JFrame {
                         LogScreen.stockPrep.invAdd(i + 1, amount[i]);
                     }
                 }
-                JOptionPane.showMessageDialog(null, "Cost: $" + Double.toString(total));
+                JOptionPane.showMessageDialog(null, "Cost: $" + Double.toString(total)+"0");
                 MainMenu mainMenu = new MainMenu(username, password);
             }
 

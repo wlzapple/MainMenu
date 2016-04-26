@@ -217,7 +217,7 @@ public class Sale extends JFrame {
                         LogScreen.stockPrep.invSub(i + 1, amount[i]);
                     }
                 }
-                JOptionPane.showMessageDialog(null, "Your total is: $" + Double.toString(total));
+                JOptionPane.showMessageDialog(null, "Your total is: $" + Double.toString(total)+"0");
                 MainMenu mainMenu = new MainMenu(username, password);
             }
 
