@@ -102,6 +102,7 @@ class Inventory extends JFrame {
             FileOutputStream out = new FileOutputStream(file);
             OutputStreamWriter osw = new OutputStreamWriter(out);
             Writer w = new BufferedWriter(osw);
+            
             for (int i = 1; i < 26; i++) {
                 w.write(stock[i][0] + ":" + stock[i][1] + ":" + stock[i][2] + "\n");
             }

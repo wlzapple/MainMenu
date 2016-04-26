@@ -1,8 +1,8 @@
-Drum Set:7:750
-Alto Sax:8:1100
+Drum Set:15:750
+Alto Sax:15:1100
 Tenor Sax:3:1350
 Trumpet:7:500
-Electric Guitar:6:900
+Electric Guitar:9:900
 Euphonium:6:1800
 Flute:7:350
 Drum Sticks(any set):10:10
