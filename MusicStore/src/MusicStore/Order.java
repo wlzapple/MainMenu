@@ -247,7 +247,7 @@ public class Order extends JFrame {
                     Order order = new Order(username, password);
                 } else {
                     Transaction refresh = new Transaction(cart, false);
-                    System.out.println(Arrays.toString(cart));
+                    //System.out.println(Arrays.toString(cart));
                 }
             }
 
@@ -290,7 +290,7 @@ public class Order extends JFrame {
             } catch (Exception e) {
                 System.err.println("Issue writing to Records.txt");
             }
-            System.out.println(recNum);
+            //System.out.println(recNum);
         }
 
     }
