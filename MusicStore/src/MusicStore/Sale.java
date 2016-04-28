@@ -239,7 +239,7 @@ public class Sale extends JFrame {
                     Sale sale = new Sale(username, password);
                 } else {
                     Transaction refresh = new Transaction(cart, false);
-                    System.out.println(Arrays.toString(cart));
+                    //System.out.println(Arrays.toString(cart));
                 }
             }
 
