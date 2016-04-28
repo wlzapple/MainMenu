@@ -40,7 +40,7 @@ class ReturnItem extends JFrame {
         this.password = password;
         this.getContentPane().setBackground(new Color(0, 129, 172));
         //ask if they have a receipt
-        int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt?", "Receipt", JOptionPane.YES_NO_OPTION);
+        int receiptYN = JOptionPane.showConfirmDialog(null, "Does the customer have a receipt from within the last 3 years?", "Receipt", JOptionPane.YES_NO_OPTION);
         if (receiptYN != JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Inform the customer that we cannot accept an item without a receipt.", "", JOptionPane.PLAIN_MESSAGE);
             MainMenu mainMenu = new MainMenu(username, password);
